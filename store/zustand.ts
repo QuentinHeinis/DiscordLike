@@ -1,9 +1,19 @@
 import { create } from "zustand";
 import {Servers} from '@/public/data'
 
-export const useStore = create()((set) => ({
+type ServersType = {
+  name: string;
+  link: string;
+  id: number;
+  img?: string;
+};
+
+type StoreType = {
+  getNav: ServersType[];
+  setNav: (getNav:[]) => void;
+};
+
+export const useStore = create<StoreType>()((set) => ({
   getNav: Servers,
   setNav: (getNav:[]) => set({ getNav }),
-  getActivServ: '',
-  setActivServ: (getActivNav:string) => set({ getActivNav }),
 }));

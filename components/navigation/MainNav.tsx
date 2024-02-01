@@ -31,13 +31,20 @@ const Bubble = ({link, isHome, img, name}:BubbleType)  =>{
 
 
 export default function MainNav() {
-  const { getNav, setNav } = useStore();  
-  
+  // const { getNav, setNav } : {getNav: , setNav : []} = useStore();  
+  const getNav = useStore().getNav
+  const setNav = useStore().setNav
+  type ServersType = {
+    name: string;
+    link: string;
+    id: number;
+    img?: string;
+  };
   return(
     <div className="bg-slate-700 p-3 w-20">
     <Bubble name='Home' isHome={true} link='/friends'/>
     <ReactSortable list={getNav} setList={setNav} className='flex flex-col gap-3 pt-3 mt-3 border-t-2'>
-        {getNav.map((item:BubbleType, index:number) => (
+        {getNav.map((item:ServersType, index:number) => (
           <Bubble key={index} link={item.link} img={item.img} isHome={false} name={item.name}/>
         ))}
     </ReactSortable>

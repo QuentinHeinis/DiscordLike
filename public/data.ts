@@ -19,7 +19,21 @@ const Friends = [
   },
 ];
 
-const Servers = [
+  type ChannelType = {
+    name: string;
+    id: number;
+    type: "text" | "voice" | "cam";
+    serverId: number | string;
+  };
+
+type ServersType = {
+  name: string;
+  link: string;
+  id: number;
+  img?: string;
+};
+
+const Servers : ServersType[] = [
   {
     name: "Suihira",
     link: "/servers/1/1",
