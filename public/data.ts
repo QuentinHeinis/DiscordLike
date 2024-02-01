@@ -19,12 +19,6 @@ const Friends = [
   },
 ];
 
-  type ChannelType = {
-    name: string;
-    id: number;
-    type: "text" | "voice" | "cam";
-    serverId: number | string;
-  };
 
 type ServersType = {
   name: string;
