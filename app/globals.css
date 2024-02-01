@@ -31,3 +31,8 @@ body {
     text-wrap: balance;
   }
 }
+
+
+.overflow-anchor-none {
+  overflow-anchor: none;
+}
