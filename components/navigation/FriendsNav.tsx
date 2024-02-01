@@ -3,13 +3,13 @@ import { UserCircleIcon } from '@heroicons/react/24/solid'
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import React from 'react';
+import {ReactElement} from 'react';
 
 import {Friends} from '@/public/data'
 
 type ItemType = {
   label: string,
-  icon: React.RefAttributes<SVGSVGElement> | string,
+  icon:ReactElement,
   link: string
 }
 const Item = ({label, icon, link} : ItemType) =>{
