@@ -8,7 +8,7 @@ const SignInPage = () => {
       <p>Sign-in to your account</p>
       <InputForm key={1} type="text" placeholder="Nom d'utilisateur" name="username" label="Nom d'utilisateur" />
       <InputForm key={2} type="password" placeholder="Mot de passe" name="password" label="Mot de passe" />
-      <p>Vous n'avez pas de compte ? <Link href="/sign-up" className="text-blue-400">Sign-up</Link></p>
+      <p>Vous n&apos;avez pas de compte ? <Link href="/sign-up" className="text-blue-400">Sign-up</Link></p>
     </form>
   )
 }
