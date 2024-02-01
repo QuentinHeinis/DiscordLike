@@ -3,7 +3,9 @@ import { BoltIcon } from '@heroicons/react/24/solid'
 import Link from 'next/link'
 import Image from 'next/image'
 import { ReactSortable } from 'react-sortablejs'
-import { useStore } from "@/store/zustand";
+
+import { Servers } from '@/public/data'
+import { useState } from 'react'
 
 type BubbleType = {
   isHome: boolean,
@@ -31,20 +33,22 @@ const Bubble = ({link, isHome, img, name}:BubbleType)  =>{
 
 
 export default function MainNav() {
-  // const { getNav, setNav } : {getNav: , setNav : []} = useStore();  
-  const getNav = useStore().getNav
-  const setNav = useStore().setNav
+
   type ServersType = {
     name: string;
     link: string;
     id: number;
     img?: string;
   };
+
+  const [navList, setNavList] = useState(Servers)
+
+
   return(
     <div className="bg-slate-700 p-3 w-20">
     <Bubble name='Home' isHome={true} link='/friends'/>
-    <ReactSortable list={getNav} setList={setNav} className='flex flex-col gap-3 pt-3 mt-3 border-t-2'>
-        {getNav.map((item:ServersType, index:number) => (
+    <ReactSortable list={navList} setList={setNavList} className='flex flex-col gap-3 pt-3 mt-3 border-t-2'>
+        {navList.map((item:ServersType, index:number) => (
           <Bubble key={index} link={item.link} img={item.img} isHome={false} name={item.name}/>
         ))}
     </ReactSortable>
