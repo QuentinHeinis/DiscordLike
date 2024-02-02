@@ -1,10 +1,10 @@
 'use client'
 import { ChevronDownIcon, HashtagIcon, SpeakerWaveIcon, UserCircleIcon, UserPlusIcon, VideoCameraIcon } from '@heroicons/react/24/solid'
 import Link from 'next/link';
-import { Fragment } from 'react';
 
 import {Channels, Servers} from '@/public/data'
 import Profile from '../ui/Profile';
+import { useStore } from '@/store/zustand';
 
 type ItemType = {
   serverId: string | number,
@@ -27,8 +27,10 @@ const ChannelIcon = ({type}:{type:string}) => {
 }
 
 const Item = ({serverId, channelId, channelType, channelName} : ItemType) =>{
+  const {setMenuOpen} = useStore()
   return(
     <Link 
+      onClick={()=>setMenuOpen(false)}
       href={`/servers/${serverId}/${channelId}`}
       className={`w-full h-12 flex items-center transition-colors cursor-pointer hover:bg-slate-600 px-4 gap-2 rounded-md`}
     >
@@ -77,7 +79,7 @@ const ServerChannel = Channels.filter((channel:ChannelType) => channel.serverId 
   }
 
   return (
-    <div className='w-64 bg-slate-900 flex-none flex flex-col justify-between max-h-dvh'>
+    <div className="w-64 bg-slate-900 flex-none flex flex-col justify-between max-h-dvh">
       <div>
         <div className='group relative w-full bg-slate-500 flex justify-around items-center h-16 border-b border-slate-200'>
           <p className='text-xl font-bold text-slate-100'>{serverName}</p>

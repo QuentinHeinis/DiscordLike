@@ -7,6 +7,7 @@ import {ReactElement} from 'react';
 
 import {Friends} from '@/public/data'
 import Profile from '../ui/Profile';
+import { useStore } from '@/store/zustand';
 
 type ItemType = {
   label: string,
@@ -15,8 +16,9 @@ type ItemType = {
 }
 const Item = ({label, icon, link} : ItemType) =>{
   const pathname = usePathname()
+  const {setMenuOpen} = useStore()
   return(
-    <Link href={link}  className={`w-full h-12 flex items-center transition-colors cursor-pointer hover:bg-slate-600 px-4 gap-2 rounded-md ${pathname === link ? 'bg-slate-600' : ''}`}>
+    <Link onClick={()=>setMenuOpen(false)} href={link}  className={`w-full h-12 flex items-center transition-colors cursor-pointer hover:bg-slate-600 px-4 gap-2 rounded-md ${pathname === link ? 'bg-slate-600' : ''}`}>
       {icon}
       {label}
     </Link>

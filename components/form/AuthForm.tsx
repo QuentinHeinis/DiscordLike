@@ -8,7 +8,6 @@ import { useRouter } from "next/navigation";
 import Input from "./Input";
 import toast from "react-hot-toast";
 import Button from "./Button";
-import { sign } from "crypto";
 
 type Variant = 'LOGIN' | 'REGISTER';
 

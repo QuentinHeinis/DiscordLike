@@ -17,7 +17,7 @@ const ChannelIdPage = ({params}: ChannelIdPageProps) => {
 
   return (
     <>
-        <ServersNav serverId={params.serverId}/>
+        {/* <ServersNav serverId={params.serverId}/> */}
         <main className="max-h-screen h-screen bg-slate-700 w-full p-2 pb-0 relative">
           <ChannelHeader isMsg={true} title='salut'/>
           <MessageZone messages={messages}/>

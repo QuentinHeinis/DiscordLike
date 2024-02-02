@@ -1,13 +1,13 @@
-import MainNav from "@/components/navigation/MainNav";
-
+import Navigation from "@/components/navigation/Navigation";
 export default function MainLayout({
-  children,
+  children
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  
   return (
     <>
-    <MainNav/>
+      <Navigation/>
       {children}
     </>
   );
