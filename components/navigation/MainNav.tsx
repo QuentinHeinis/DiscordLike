@@ -6,6 +6,7 @@ import { ReactSortable } from 'react-sortablejs'
 
 import { Servers } from '@/public/data'
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 
 type BubbleType = {
   isHome: boolean,
@@ -14,8 +15,12 @@ type BubbleType = {
   link: string
 }
 const Bubble = ({link, isHome, img, name}:BubbleType)  =>{
+  const router = useRouter()
+  const redirect = () => {
+    router.push(link)
+  }
   return(
-    <Link href={link} className={`group relative bg-slate-500 flex h-14 w-14 ${isHome && 'p-2 rounded-lg justify-center items-center'} ${!isHome && 'rounded-full'}`}>
+    <Link href={link} onClick={()=>redirect()} className={`group relative bg-slate-500 flex h-14 w-14 ${isHome && 'p-2 rounded-lg justify-center items-center'} ${!isHome && 'rounded-full'}`}>
       {isHome ? <BoltIcon className="h-6 w-6 text-white"/>
       :
       img ?  
