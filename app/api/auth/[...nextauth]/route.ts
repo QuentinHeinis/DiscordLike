@@ -11,12 +11,12 @@ export const authOptions: AuthOptions = {
     CredentialsProvider({
       name: "credentials",
       credentials: {
-        email: { label: "Email", type: "text" },
-        password: { label: "Password", type: "password" },
+        email: { label: "email", type: "text" },
+        password: { label: "password", type: "password" },
       },
-      async authorize(credentials, req) {
+      async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) {
-          throw new Error("invalid credentials");
+          throw new Error("Invalid credentials");
         }
 
         const user = await prisma.user.findUnique({
@@ -25,16 +25,17 @@ export const authOptions: AuthOptions = {
           },
         });
 
-        if (!user || !user.hashedPassword) {
-          throw new Error("invalid credentials");
+        if (!user || !user?.hashedPassword) {
+          throw new Error("Invalid credentials");
         }
 
         const isValid = await bcrypt.compare(
           credentials.password,
           user.hashedPassword
         );
+
         if (!isValid) {
-          throw new Error("invalid credentials");
+          throw new Error("Invalid credentials");
         }
 
         return user;
@@ -43,12 +44,11 @@ export const authOptions: AuthOptions = {
   ],
   debug: process.env.NODE_ENV === "development",
   session: {
-    strategy : "jwt"
+    strategy: "jwt",
   },
   secret: process.env.NEXTAUTH_SECRET,
 };
 
-
 const handler = NextAuth(authOptions);
 
-export {handler as GET, handler as POST}
+export { handler as GET, handler as POST };
