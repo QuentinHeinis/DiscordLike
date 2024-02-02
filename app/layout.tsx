@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "@/app/globals.css";
+import ToasterContext from "./context/ToasterContext";
+
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,6 +21,7 @@ export default function RootLayout({
   return (
     <html lang="fr">
       <body className={`flex ${inter.className}`}>
+        <ToasterContext/>
         {children}
       </body>
     </html>
