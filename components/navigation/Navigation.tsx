@@ -18,10 +18,10 @@ const Navigation = () => {
   }
 
   return (
-    <nav className={`flex w-full h-full absolute z-10 max-h-dvh ${menuOpen ? '-translate-x-0' : '-translate-x-full'} md:static md:translate-x-0 md:w-fit md:h-auto`}>
+    <nav className={`flex w-full h-full absolute z-10 max-h-dvh transition-all duration-500 ${menuOpen ? '-translate-x-0' : '-translate-x-full'} md:static md:translate-x-0 md:w-fit md:h-auto`}>
       <MainNav/>
       {isServer ? <ServersNav serverId={serverId}/> : <FriendsNav/>}
-      <div className="w-full h-full bg-gray-900 bg-opacity-30 cursor-pointer md:hidden" onClick={()=>toggleMenu()}></div>
+      {menuOpen && <div className="w-full h-full bg-gray-900 bg-opacity-30 cursor-pointer md:hidden" onClick={()=>toggleMenu()}></div>}
     </nav>
   )
 }
