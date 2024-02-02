@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { Fragment } from 'react';
 
 import {Channels, Servers} from '@/public/data'
+import Profile from '../ui/Profile';
 
 type ItemType = {
   serverId: string | number,
@@ -76,36 +77,35 @@ const ServerChannel = Channels.filter((channel:ChannelType) => channel.serverId 
   }
 
   return (
-    <>
-      {
-        <div className="w-64 bg-slate-900 flex-none">
-          <div className='group relative w-full bg-slate-500 flex justify-around items-center h-16 border-b border-slate-200'>
-            <p className='text-xl font-bold text-slate-100'>{serverName}</p>
-            <div>
-              <ChevronDownIcon className='group-hover:rotate-180 transition-all h-6 w-6'/>
-            </div>
-            <div className='h-0 group-hover:h-fit transition-all scale-50 group-hover:scale-100 overflow-hidden absolute w-[90%] bg-slate-500 top-full'>
-              <ServerUtils text='Inviter des gens' icon={<UserPlusIcon className='h-6'/>}/>
-              <ServerUtils text='Paramètres du serveur' icon={<UserPlusIcon className='h-6'/>}/>
-              <ServerUtils text='Créer un salon' icon={<UserPlusIcon className='h-6'/>}/>
-            </div>
+    <div className='w-64 bg-slate-900 flex-none flex flex-col justify-between max-h-dvh'>
+      <div>
+        <div className='group relative w-full bg-slate-500 flex justify-around items-center h-16 border-b border-slate-200'>
+          <p className='text-xl font-bold text-slate-100'>{serverName}</p>
+          <div>
+            <ChevronDownIcon className='group-hover:rotate-180 transition-all h-6 w-6'/>
           </div>
-          {
-            Array.from(ChannelTypes).map((type:ChannelType['type']) => (
-              <div key={type} className='p-2'>
-                <ChannelSection type={type}/>
-                {
-                  ServerChannel.map((channel:ChannelType) => (
-                    channel.type === type &&
-                    <Item key={channel.id} channelId={channel.id} channelName={channel.name} channelType={channel.type} serverId={serverId} />
-                  ))
-                }
-              </div>
-            ))
-          }
+          <div className='h-0 group-hover:h-fit transition-all scale-50 group-hover:scale-100 overflow-hidden absolute w-[90%] bg-slate-500 top-full'>
+            <ServerUtils text='Inviter des gens' icon={<UserPlusIcon className='h-6'/>}/>
+            <ServerUtils text='Paramètres du serveur' icon={<UserPlusIcon className='h-6'/>}/>
+            <ServerUtils text='Créer un salon' icon={<UserPlusIcon className='h-6'/>}/>
+          </div>
         </div>
-      }
-    </>
+        {
+          Array.from(ChannelTypes).map((type:ChannelType['type']) => (
+            <div key={type} className='p-2'>
+              <ChannelSection type={type}/>
+              {
+                ServerChannel.map((channel:ChannelType) => (
+                  channel.type === type &&
+                  <Item key={channel.id} channelId={channel.id} channelName={channel.name} channelType={channel.type} serverId={serverId} />
+                ))
+              }
+            </div>
+          ))
+        }
+      </div>
+      <Profile/>
+    </div>
   )
 }
 
