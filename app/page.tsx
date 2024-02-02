@@ -1,9 +1,11 @@
-import Image from "next/image";
+import AuthForm from "@/components/form/AuthForm"
 
-export default function Home() {
+const SignInPage = () => {
   return (
-    <main className="min-h-screen p-24">
-        
-    </main>
-  );
+    <div className="grid place-content-center w-screen h-screen overflow-hidden">
+      <AuthForm/>
+    </div>
+  )
 }
+
+export default SignInPage
