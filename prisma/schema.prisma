@@ -12,7 +12,7 @@ datasource db {
 
 model User {
   id String  @id @default(auto()) @map("_id") @db.ObjectId
-  name String
+  name String @unique
   imageUrl String? @db.String
   email String @unique
   hashedPassword String @db.String
