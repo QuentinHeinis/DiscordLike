@@ -3,23 +3,37 @@ import { FieldValues, SubmitHandler, useForm } from "react-hook-form"
 import Input from "./Input"
 import Button from "./Button"
 import axios from "axios"
+import { CldUploadButton } from "next-cloudinary"
+import Image from "next/image"
+import { useEffect } from "react"
 const AddServer = () => {
-  const { register, handleSubmit, formState: { errors } } = useForm<FieldValues>()
+  const { register, handleSubmit, formState: { errors }, setValue, watch } = useForm<FieldValues>()
   const onSubmit:SubmitHandler<FieldValues> = (data) => {
     // handle create server
-    console.log(data);
+    axios.post('/api/server', data)
     
+  }
+  
+  
+  const image = watch('image');
+  
+    useEffect(() => {
+      console.log(image);
+    }
+    , [image])
+  const handleUpload = (result: any) => {
+    setValue('image', result.info.secure_url, { 
+      shouldValidate: true 
+    });
   }
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-        <Input
-          register={register}
-          errors={errors}
-          required
-          id="imageServerCreated" 
-          type="file"
-          label="Image"
-        />
+        <Image src={image || ''} alt="" height={56} width={56}/>
+                      <CldUploadButton 
+                    options={{ maxFiles: 1 }} 
+                    onUpload={handleUpload} 
+                    uploadPreset="jgueeeco"
+                  ></CldUploadButton>
         <Input
           register={register}
           errors={errors}
