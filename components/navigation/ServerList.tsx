@@ -16,7 +16,7 @@ const ServerList = ({servers} : {servers:Server[]}) => {
     <>
       <ReactSortable list={navList} setList={setNavList} fallbackTolerance={4} className='flex flex-col gap-3 pt-3 mt-3 border-t-2'>
           {navList.map((item:Server, index:number) => (
-            <ServerBubble key={index} link={`servers/${item.id}`} img={item.imageUrl} isHome={false} name={item.name}/>
+            <ServerBubble key={index} link={`/servers/${item.id}`} img={item.imageUrl} isHome={false} name={item.name}/>
           ))}
       </ReactSortable>
       
