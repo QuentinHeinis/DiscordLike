@@ -7,7 +7,7 @@ type pageType = {
   }
 }
 
-const page =async ({params}:pageType) => {
+const page = async ({params}:pageType) => {
 const firstChannel = await db.channel.findFirst({
   where:{
     serverId: params.serverId

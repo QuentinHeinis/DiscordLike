@@ -5,8 +5,12 @@ import SecondaryNav from "./SecondaryNav"
 import CloseNavigation from "../CloseNavigation"
 import NavLayout from "./NavLayout"
 
+type NavigationType ={
+  type: 'servers' | 'friends',
+  id?: string
+}
 
-const Navigation = async () => {
+const Navigation = async ({type, id} : NavigationType) => {
 
   const user = await getCurrentUser()
 
@@ -14,7 +18,7 @@ const Navigation = async () => {
     <NavLayout>
       <MainNav/>
       <div className="w-64 bg-slate-900 flex-none flex flex-col justify-between max-h-dvh">
-        <SecondaryNav/>
+        <SecondaryNav type={type} id={id}/>
         <Profile user={user!}/>
       </div>
       <CloseNavigation/>
