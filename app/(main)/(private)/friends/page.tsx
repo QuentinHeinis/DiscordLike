@@ -3,6 +3,8 @@ import ChannelHeader from "@/components/navigation/ChannelHeader"
 import { UserPlusIcon } from "@heroicons/react/24/solid"
 import Link from "next/link"
 
+
+
 const MessagesPage = () => {
 
 const addFriend = () =>{

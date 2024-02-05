@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import "@/app/globals.css";
 import ToasterContext from "./context/ToasterContext";
 import AuthContext from "./context/AuthContext";
-
+import Modal from "@/components/modal/Modal";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,13 +17,13 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
   
   return (
     <html lang="fr">
       <body className={`flex ${inter.className}`}>
         <AuthContext>
           <ToasterContext/>
+          <Modal/>
           {children}
         </AuthContext>
       </body>

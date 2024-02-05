@@ -1,9 +1,8 @@
-import FriendsNav from "@/components/navigation/FriendsNav";
+import getCurrentUser from "@/lib/current-profil"
 
-export default function Template({ children }: { children: React.ReactNode }) {
+export default async function Template({ children }: { children: React.ReactNode }) {  
   return (
   <>
-    {/* <FriendsNav/> */}
     {children}
   </>
   )

@@ -1,4 +1,3 @@
-'use client'
 import { UserCircleIcon } from '@heroicons/react/24/solid'
 import Image from 'next/image';
 import Link from 'next/link';
@@ -44,7 +43,6 @@ const FriendsNav = () => {
           ))
         }
       </div>
-      <Profile/>
     </div>
   )
 }
