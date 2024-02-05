@@ -1,29 +1,22 @@
 'use client'
-
-import { Servers } from "@/public/data"
 import { useState } from "react"
 import { ReactSortable } from "react-sortablejs"
 import ServerBubble from "../ui/ServerBubble"
 import { GlobeEuropeAfricaIcon, PlusIcon } from "@heroicons/react/24/solid"
 import { useStore } from "@/store/zustand"
+import { Server } from "@prisma/client"
 
-const ServerList = () => {
 
-  type ServersType = {
-    name: string;
-    link: string;
-    id: number;
-    img?: string;
-  };
+const ServerList = ({servers} : {servers:Server[]}) => {  
 
-  const [navList, setNavList] = useState(Servers)
+  const [navList, setNavList] = useState(servers)
 
   const {setModalOpen} = useStore()
   return (
     <>
       <ReactSortable list={navList} setList={setNavList} fallbackTolerance={4} className='flex flex-col gap-3 pt-3 mt-3 border-t-2'>
-          {navList.map((item:ServersType, index:number) => (
-            <ServerBubble key={index} link={item.link} img={item.img} isHome={false} name={item.name}/>
+          {navList.map((item:Server, index:number) => (
+            <ServerBubble key={index} link={`servers/${item.id}`} img={item.imageUrl} isHome={false} name={item.name}/>
           ))}
       </ReactSortable>
       
