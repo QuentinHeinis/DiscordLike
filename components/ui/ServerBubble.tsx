@@ -12,7 +12,7 @@ type BubbleType = {
 }
 const ServerBubble = ({link, isHome, img, name}:BubbleType) => {
   const pathname = usePathname()
-  const getId = pathname.split('/')[2]
+  const getId = pathname?.split('/')[2]
   const linkId = link.split('/')[2]
   return(
     <div className={`after:h-14 after:bg-white after:rounded-tr-xl after:rounded-br-xl after:w-1 after:-translate-y-full after:absolute after:left-0  ${getId === linkId ? 'after:flex' : 'after:hidden'}`}>
