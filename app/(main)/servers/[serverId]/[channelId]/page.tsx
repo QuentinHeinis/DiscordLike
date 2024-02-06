@@ -4,7 +4,7 @@ import {ChatMessages} from "@/components/ui/MessageZone"
 import getCurrentUser from "@/lib/current-profil"
 import db from '@/lib/prismadb'
 import { redirect } from "next/navigation"
-import MediaRoom from "@/components/chat/mediaRoom"
+import {MediaRoom} from "@/components/chat/mediaRoom"
 
 interface ChannelIdPageProps {
   params:{
@@ -77,10 +77,22 @@ const ChannelIdPage = async ({params}: ChannelIdPageProps) => {
         </>
       }
       {
-        channel.type === "AUDIO" && <MediaRoom/>
+        channel.type === "AUDIO" &&         
+        <MediaRoom
+          chatId={channel.id}
+          video={false}
+          audio={true}
+          user={user}
+        />
       }
       {
-        channel.type === "VIDEO" && <MediaRoom/>
+        channel.type === "VIDEO" && 
+        <MediaRoom
+          chatId={channel.id}
+          video={true}
+          audio={true}
+          user={user}
+        />
       }
       
     </main>
