@@ -5,13 +5,15 @@ import Button from "../ui/Button"
 import axios from "axios"
 import { CldUploadButton } from "next-cloudinary"
 import Image from "next/image"
-import { useEffect } from "react"
+import { useRouter } from "next/navigation"
+
 const AddServer = () => {
   const { register, handleSubmit, formState: { errors }, setValue, watch } = useForm<FieldValues>()
+  const router = useRouter();
   const onSubmit:SubmitHandler<FieldValues> = (data) => {
     // handle create server
     axios.post('/api/server', data)
-    
+    router.refresh();
   }
   
   
