@@ -18,7 +18,7 @@ const AddChannel = () => {
     // handle create channel
     const dataSend = {
       ...data,
-      serverId: params.serverId
+      serverId: params?.serverId
     }
 
     await axios.post('/api/server/channel', dataSend)
