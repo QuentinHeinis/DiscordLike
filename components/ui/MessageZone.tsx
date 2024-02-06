@@ -41,6 +41,7 @@ import { useChatQuery } from "@/hook/UseChatQuery";
 import { useChatSocket } from "@/hook/UseChatSocket";
 import { useChatScroll } from "@/hook/UseChatScroll";
 import { ChatItem } from "../chat/ChatItem";
+import { ChatWelcome } from "../chat/ChatWelcome";
 
 // import { ChatWelcome } from "./chat-welcome";
 // import { ChatItem } from "./chat-item";
@@ -126,14 +127,13 @@ export const ChatMessages = ({
   }
 
   return (
-    <div ref={chatRef} className="flex-1 flex flex-col py-4 overflow-y-auto">
+    <div ref={chatRef} className="flex-1 flex flex-col py-4 overflow-y-auto pt-20">
       {!hasNextPage && <div className="flex-1" />}
       {!hasNextPage && (
-        // <ChatWelcome
-        //   type={type}
-        //   name={name}
-        // />
-        <div>ChatWelcome</div>
+        <ChatWelcome
+          type={type}
+          name={name}
+        />
       )}
       {hasNextPage && (
         <div className="flex justify-center">
