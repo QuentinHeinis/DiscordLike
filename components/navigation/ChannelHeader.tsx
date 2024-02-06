@@ -1,3 +1,4 @@
+'use client'
 import { useStore } from "@/store/zustand"
 import { Bars3Icon, ChatBubbleLeftRightIcon } from "@heroicons/react/24/solid"
 

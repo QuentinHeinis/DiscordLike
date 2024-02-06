@@ -4,7 +4,6 @@ import ServerList from '../ServerList'
 
 import db from '@/lib/prismadb'
 import { redirect } from 'next/navigation'
-import { Channel } from '@prisma/client'
 
 export default async function MainNav() {
   const profile = await getCurrentUser()
