@@ -5,6 +5,7 @@ import ToasterContext from "./context/ToasterContext";
 import AuthContext from "./context/AuthContext";
 import Modal from "@/components/modal/Modal";
 import { QueryProvider } from "@/components/providers/QueryProvider";
+import { SocketProvider } from "@/components/providers/SocketProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,9 +26,11 @@ export default function RootLayout({
         <AuthContext>
           <ToasterContext/>
           <Modal/>
-          <QueryProvider>
-            {children}
-          </QueryProvider>
+          <SocketProvider>
+            <QueryProvider>
+              {children}
+            </QueryProvider>
+          </SocketProvider>
         </AuthContext>
       </body>
     </html>
