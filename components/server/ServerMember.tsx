@@ -5,7 +5,7 @@ type ServerMemberType = {
   members: MemberType[]
 }
 const ServerMember = ({members}:ServerMemberType) => {
-  console.log(members[0].user);
+  console.log(members[0]);
   
   return (
     <div>{

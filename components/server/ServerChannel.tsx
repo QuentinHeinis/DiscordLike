@@ -37,9 +37,10 @@ const Item = ({id, name, serverId} : ItemType ) => {
 
 type ServerChannelType = {
   channels: Channel[],
-  serverId: string
+  serverId: string, 
+  isModo: boolean
 }
-const ServerChannel = ({channels, serverId} : ServerChannelType) => {
+const ServerChannel = ({channels, serverId, isModo} : ServerChannelType) => {
 
 const ChannelTypes  = new Set(channels.map((channel:Channel) => channel.type))
 
