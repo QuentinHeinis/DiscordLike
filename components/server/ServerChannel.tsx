@@ -1,5 +1,5 @@
 'use client'
-import { PlusIcon } from "@heroicons/react/24/solid"
+import { Cog6ToothIcon, PlusIcon } from "@heroicons/react/24/solid"
 import { Channel } from "@prisma/client"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
@@ -22,16 +22,28 @@ const ChannelSection = ({type} : {type:Channel['type']}) => {
 type ItemType = {
   id: string,
   name: string,
-  serverId: string
+  serverId: string,
+  isModo: boolean
 }
 
-const Item = ({id, name, serverId} : ItemType ) => {
+const Item = ({id, name, serverId, isModo} : ItemType ) => {
   const pathname = usePathname()
+  const {setModalOpen, setCurrentUpdateId} = useStore()
   const link = `/servers/${serverId}/${id}`
   return (
-    <Link href={link} className={`w-full h-12 flex items-center transition-colors cursor-pointer hover:bg-slate-600 px-4 gap-2 rounded-md ${pathname === link ? 'bg-slate-600' : ''}`}>
+<div className={`group  w-full h-12 flex items-center justify-between transition-colors cursor-pointer hover:bg-slate-600 px-4 gap-2 rounded-md ${pathname === link ? 'bg-slate-600' : ''}`}>
+    <Link href={link} className="w-full" >
       <p>{name}</p>
     </Link>
+    {
+      isModo &&
+    <div>
+      <button onClick={()=>{setModalOpen('updateChannel'); setCurrentUpdateId(id)}} className={`hidden group-hover:block`}>
+        <Cog6ToothIcon className="h-5 w-5"/>
+      </button>
+    </div>
+    }
+</div>
   )
 }
 
@@ -53,7 +65,7 @@ const ChannelTypes  = new Set(channels.map((channel:Channel) => channel.type))
             {
               channels.map((channel:Channel) => (
                 channel.type === type &&
-                <Item key={channel.id} id={channel.id} name={channel.name} serverId={serverId} />
+                <Item key={channel.id} id={channel.id} name={channel.name} serverId={serverId} isModo={isModo}/>
               ))
             }
           </div>

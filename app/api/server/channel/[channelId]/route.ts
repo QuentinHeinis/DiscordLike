@@ -1,19 +1,16 @@
 import { NextResponse } from "next/server";
 import { MemberRole } from "@prisma/client";
 
-import getCurrentProfil from "@/lib/current-profil";
+import getCurrentUser from "@/lib/current-profil";
 import db from "@/lib/prismadb";
 
-export async function DELETE(
+export async function POST(
   req: Request,
   { params }: { params: { channelId: string } }
-) {
+) { // post used as delete (issue with delete try catch)
   try {
-    const profile = await getCurrentProfil();
-    const { searchParams } = new URL(req.url);
-
-    const serverId = searchParams.get("serverId");
-
+    const profile = await getCurrentUser();
+    const { serverId } = await req.json();
     if (!profile) {
       return new NextResponse("Unauthorized", { status: 401 });
     }
@@ -62,11 +59,8 @@ export async function PATCH(
   { params }: { params: { channelId: string } }
 ) {
   try {
-    const profile = await getCurrentProfil();
-    const { name, type } = await req.json();
-    const { searchParams } = new URL(req.url);
-
-    const serverId = searchParams.get("serverId");
+    const profile = await getCurrentUser();
+    const { name, type, serverId } = await req.json();
 
     if (!profile) {
       return new NextResponse("Unauthorized", { status: 401 });

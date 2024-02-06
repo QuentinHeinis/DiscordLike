@@ -5,9 +5,9 @@ import { signIn, useSession } from 'next-auth/react';
 import { useCallback, useEffect, useState } from 'react';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { useRouter } from "next/navigation";
-import Input from "./Input";
+import Input from "./ui/Input";
 import toast from "react-hot-toast";
-import Button from "./Button";
+import Button from "./ui/Button";
 
 type Variant = 'LOGIN' | 'REGISTER';
 

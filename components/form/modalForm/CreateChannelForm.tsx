@@ -1,8 +1,8 @@
 'use client'
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form"
-import Input from "./Input"
-import Select from "./Select"
-import Button from "./Button"
+import Input from "../ui/Input"
+import Select from "../ui/Select"
+import Button from "../ui/Button"
 import axios from "axios"
 import { ChannelType } from "@prisma/client" 
 import { useParams, useRouter } from "next/navigation"

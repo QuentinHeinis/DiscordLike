@@ -1,6 +1,6 @@
 'use client'
 import ChannelHeader from "@/components/navigation/ChannelHeader"
-import AddFriendForm from "@/components/form/AddFriendForm"
+import AddFriendForm from "@/components/form/modalForm/AddFriendForm"
 
 const MessagesPage = () => {
 

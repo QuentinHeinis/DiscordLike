@@ -1,13 +1,14 @@
 'use client'
 import { XMarkIcon } from "@heroicons/react/24/solid"
 import { useStore } from "@/store/zustand"
-import CreateServerForm from "../form/CreateServerForm"
-import CreateChannel from "../form/CreateChannelForm"
+import CreateServerForm from "../form/modalForm/CreateServerForm"
+import CreateChannel from "../form/modalForm/CreateChannelForm"
 import { useEffect, useState } from "react"
+import UpdateChannel from "../form/modalForm/UpdateChannelForm"
 
 const Modal = () => {
   const {modalOpen, setModalOpen} = useStore()
-  type nameType = 'Create a server' | 'Search for a server' | 'Create a channel'
+  type nameType = 'Create a server' | 'Search for a server' | 'Create a channel' | 'Update a channel'
   const [name, setName] = useState<nameType>('Create a server')
 
   useEffect(() => {
@@ -22,6 +23,9 @@ const Modal = () => {
         break
       case 'searchServer':
         setName('Search for a server')
+        break
+      case 'updateChannel':
+        setName('Update a channel')
         break
       default:
         return
@@ -39,6 +43,8 @@ const Modal = () => {
         return <CreateServerForm/>
       case 'addChannel':
         return <CreateChannel/>
+      case 'updateChannel':
+        return <UpdateChannel/>
       default:
         return
     }
