@@ -17,8 +17,6 @@ const isModo = checkModo ? true : false
 
 
 
-console.log({isModo});
-
   return (
     <div>
       <ServerHeader serverName={server.name}/>

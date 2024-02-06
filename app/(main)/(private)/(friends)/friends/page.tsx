@@ -13,7 +13,7 @@ const addFriend = () =>{
 
   return (
     <main className="max-h-screen h-screen bg-slate-700 pt-20 w-full p-2 pb-0 relative">
-      <ChannelHeader isMsg={false} title='Amis'>
+      <ChannelHeader title='Amis'>
         <Link href='friends/add'><UserPlusIcon className="h-6 w-6"/></Link>
       </ChannelHeader>
       

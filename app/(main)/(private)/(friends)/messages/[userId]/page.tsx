@@ -27,7 +27,7 @@ const MessagesPage = ({params}:UserIdPageProps) => {
 
   return (
     <main className="max-h-screen h-screen bg-slate-700 w-full p-2 pb-0 relative">
-      <ChannelHeader isMsg={true} title='salut'/>
+      <ChannelHeader type="TEXT" title='salut'/>
       <MessageZone messages={messages}/>
       <MessageInput channelName="test"/> 
     </main>

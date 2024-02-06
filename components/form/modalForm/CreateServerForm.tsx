@@ -17,10 +17,6 @@ const AddServer = () => {
   
   const image = watch('image');
   
-    useEffect(() => {
-      console.log(image);
-    }
-    , [image])
   const handleUpload = (result: any) => {
     setValue('image', result.info.secure_url, { 
       shouldValidate: true 

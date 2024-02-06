@@ -10,7 +10,7 @@ const addFriend = () =>{
 
   return (
     <main className="max-h-screen h-screen bg-slate-700 pt-20 w-full p-2 pb-0 relative">
-      <ChannelHeader isMsg={false} title='Ajouter des amis'/>
+      <ChannelHeader title='Ajouter des amis'/>
       <AddFriendForm/>
     </main>
   )

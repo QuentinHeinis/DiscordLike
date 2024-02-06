@@ -1,5 +1,5 @@
 import Image from "next/image"
-
+import { Message } from "@prisma/client"
 
   type MessageTypes ={
     message: string,
