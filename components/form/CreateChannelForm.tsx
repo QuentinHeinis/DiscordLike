@@ -15,7 +15,7 @@ const AddChannel = () => {
   const {setModalOpen} = useStore()
   const { register, handleSubmit, formState: { errors }, setValue, watch } = useForm<FieldValues>()
   const onSubmit:SubmitHandler<FieldValues> = async (data) => {
-    // handle create server
+    // handle create channel
     const dataSend = {
       ...data,
       serverId: params.serverId
