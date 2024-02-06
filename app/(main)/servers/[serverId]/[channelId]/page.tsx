@@ -6,7 +6,6 @@ import db from '@/lib/prismadb'
 import { redirect } from "next/navigation"
 import MediaRoom from "@/components/chat/mediaRoom"
 
-import { messages } from '@/public/data'
 interface ChannelIdPageProps {
   params:{
     serverId: string,
