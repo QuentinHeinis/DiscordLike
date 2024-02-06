@@ -1,7 +1,7 @@
 import { NextApiRequest } from "next";
 
 import { NextApiResponseServerIo } from "@/types";
-import { currentProfilePages } from "@/lib/current-profile-pages";
+import {currentProfilePages} from "@/lib/current-profile-pages";
 import db from "@/lib/prismadb";
 
 export default async function handler(
@@ -13,7 +13,7 @@ export default async function handler(
   }
 
   try {
-    const profile = await currentProfilePages(req);
+    const profile = await currentProfilePages(req.body.userId);
     const { content, fileUrl } = req.body;
     const { serverId, channelId } = req.query;
     

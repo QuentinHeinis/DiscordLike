@@ -14,7 +14,7 @@ export default async function handler(
   }
 
   try {
-    const profile = await currentProfilePages(req);
+    const profile = await currentProfilePages(req.body.userId);
     const { messageId, serverId, channelId } = req.query;
     const { content } = req.body;
 
