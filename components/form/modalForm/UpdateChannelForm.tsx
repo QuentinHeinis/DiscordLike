@@ -31,7 +31,7 @@ const UpdateChannel = () => {
   const onDelete = async () => {
     // handle delete channel
     const dataSend :any = {
-      serverId: params.serverId
+      serverId: params?.serverId
     }
     
     await axios.post(`/api/server/channel/${currentUpdateId}`, dataSend)
