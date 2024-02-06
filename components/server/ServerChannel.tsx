@@ -1,17 +1,22 @@
 'use client'
+import { PlusIcon } from "@heroicons/react/24/solid"
 import { Channel } from "@prisma/client"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 
+import { useStore } from "@/store/zustand"
+
+
 const ChannelSection = ({type} : {type:Channel['type']}) => {
-  switch(type){
-    case 'AUDIO':
-      return <p className='text-slate-100 text-sm'>Voice Channels</p>
-    case 'TEXT':
-      return <p className='text-slate-100 text-sm'>Text Channels</p>
-    case 'VIDEO':
-      return <p className='text-slate-100 text-sm'>Video Channels</p>
-  }
+  const {setModalOpen} = useStore()
+  return (
+    <p className='text-slate-100 text-sm flex justify-between'>
+      {
+        type === 'TEXT' && 'Text Channels' || type === 'AUDIO' && 'Voice Channels' || type === 'VIDEO' && 'Video Channels'
+      }
+      <button onClick={()=>setModalOpen('addChannel')}><PlusIcon className="h-5 w-5"/></button>
+    </p>
+  )
 }
 
 type ItemType = {

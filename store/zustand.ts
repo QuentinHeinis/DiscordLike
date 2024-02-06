@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-type modalType = 'addServer' | 'searchServer' | 'none';
+type modalType = 'addServer' | 'searchServer' | 'addChannel' | 'none';
 
 type StoreType = {
   menuOpen: boolean;
