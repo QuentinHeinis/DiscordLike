@@ -8,16 +8,16 @@ type pageType = {
 }
 
 const page = async ({params}:pageType) => {
-const firstChannel = await db.channel.findFirst({
+//get the channel who's name is general
+const generalChannel = await db.channel.findFirst({
   where:{
-    serverId: params.serverId
-  },
-  orderBy:{
-    createdAt: 'asc'
+    serverId: params.serverId,
+    name: "general"
   }
 })
 
-redirect(`/servers/${params.serverId}/${firstChannel?.id}`)
+
+redirect(`/servers/${params.serverId}/${generalChannel?.id}`)
 
 }
 
