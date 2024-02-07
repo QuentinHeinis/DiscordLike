@@ -15,18 +15,13 @@ import { DirectChatItem } from "../chat/DirectChatItem";
 
 const DATE_FORMAT = "d MMM yyyy, HH:mm";
 
-type MessageWithMemberWithProfile = Message & {
-  member: Member & {
-    user: User
-  }
-}
 type DirectMessageWithMemberWithProfile = Message & {
   member: User
 }
 
 interface ChatMessagesProps {
   name: string;
-  member: Member | User;
+  member: User;
   chatId: string;
   apiUrl: string;
   socketUrl: string;
@@ -119,30 +114,6 @@ export const ChatMessages = ({
           )}
         </div>
       )}
-      {
-        type === "channel" ? (
-          <div className="flex flex-col-reverse mt-auto">
-            {data?.pages?.map((group, i) => (
-              <Fragment key={i}>
-                {group.items.map((message: MessageWithMemberWithProfile) => (
-                  <ChatItem
-                    key={message.id}
-                    id={message.id}
-                    currentMember={member}
-                    member={message.member}
-                    content={message.content}
-                    fileUrl={message.fileUrl}
-                    deleted={message.deleted}
-                    timestamp={format(new Date(message.createdAt), DATE_FORMAT)}
-                    isUpdated={message.updatedAt !== message.createdAt}
-                    socketUrl={socketUrl}
-                    socketQuery={socketQuery}
-                  />
-                ))}
-              </Fragment>
-            ))}
-          </div>
-        ) : (
           <div className="flex flex-col-reverse mt-auto">
             {data?.pages?.map((group, i) => (
               <Fragment key={i}>
@@ -151,7 +122,7 @@ export const ChatMessages = ({
                     key={message.id}
                     id={message.id}
                     currentMember={member}
-                    member={message.member}
+                    user={message.member}
                     content={message.content}
                     fileUrl={message.fileUrl}
                     deleted={message.deleted}
@@ -164,8 +135,6 @@ export const ChatMessages = ({
               </Fragment>
             ))}
           </div>
-        )
-      }
                         
       <div ref={bottomRef} />
     </div>

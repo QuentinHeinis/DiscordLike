@@ -4,7 +4,7 @@ import db from "@/lib/prismadb";
 import getCurrentProfil from "@/lib/current-profil";
 import ChannelHeader from "@/components/navigation/ChannelHeader";
 import { MediaRoom } from "@/components/chat/mediaRoom";
-import { ChatMessages } from "@/components/ui/MessageZone";
+import { ChatMessages } from "@/components/ui/DirectMessageZone";
 import MessageInput from "@/components/ui/MessageInput";
 import CallsHeader from "./components/CallsHeader";
 
@@ -30,16 +30,8 @@ const findConversation = async (memberOneId: string, memberTwoId: string) => {
         AND: [{ memberOneId: memberOneId }, { memberTwoId: memberTwoId }],
       },
       include: {
-        memberOne: {
-          include: {
-            user: true,
-          },
-        },
-        memberTwo: {
-          include: {
-            user: true,
-          },
-        },
+        memberOne: true,
+        memberTwo: true,
       },
     });
   } catch {
@@ -58,16 +50,8 @@ const createNewConversation = async (
         memberTwoId,
       },
       include: {
-        memberOne: {
-          include: {
-            user: true,
-          },
-        },
-        memberTwo: {
-          include: {
-            user: true,
-          },
-        },
+        memberOne: true,
+        memberTwo: true,
       },
     });
   } catch {
@@ -95,20 +79,8 @@ const MemberIdPage = async ({
     return redirect("/");
   }
 
-  const currentMember = await db.member.findFirst({
-    where: {
-      userId: profile.id,
-    },
-    include: {
-      user: true,
-    },
-  });
 
-  if (!currentMember) {
-    return redirect("/");
-  }
-
-  const conversation = await getOrCreateConversation(currentMember.id, params.userId);
+  const conversation = await getOrCreateConversation(profile.id, params.userId);
 
   if (!conversation) {
     return redirect("/friends");
@@ -116,11 +88,11 @@ const MemberIdPage = async ({
 
   const { memberOne, memberTwo } = conversation;
 
-  const otherMember = memberOne.userId === profile.id ? memberTwo : memberOne;
+  const otherMember = memberOne.id === profile.id ? memberTwo : memberOne;
 
   return ( 
     <div className="max-h-screen h-screen bg-slate-700 w-full p-2 pb-0 relative">
-    <ChannelHeader type='TEXT' title={otherMember.user.name}>
+    <ChannelHeader type='TEXT' title={otherMember.name}>
       <CallsHeader/>
     </ChannelHeader>
     
@@ -144,8 +116,8 @@ const MemberIdPage = async ({
         <>
         
           <ChatMessages
-            member={currentMember}
-            name={otherMember.user.name}
+            member={profile}
+            name={otherMember.name}
             chatId={conversation.id}
             type="conversation"
             apiUrl="/api/direct-messages"
@@ -159,7 +131,7 @@ const MemberIdPage = async ({
           />
           
           <MessageInput
-            name={otherMember.user.name}
+            name={otherMember.name}
             type="conversation"
             apiUrl="/api/socket/direct-messages"
             query={{

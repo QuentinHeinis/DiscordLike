@@ -36,27 +36,19 @@ export default async function handler(
         OR: [
           {
             memberOne: {
-              userId: profile.id,
+              id: profile.id,
             },
           },
           {
             memberTwo: {
-              userId: profile.id,
+              id: profile.id,
             },
           },
         ],
       },
       include: {
-        memberOne: {
-          include: {
-            user: true,
-          },
-        },
-        memberTwo: {
-          include: {
-            user: true,
-          },
-        },
+        memberOne: true,
+        memberTwo: true,
       },
     });
 
@@ -65,7 +57,7 @@ export default async function handler(
     }
 
     const member =
-      conversation.memberOne.userId === profile.id
+      conversation.memberOne.id === profile.id
         ? conversation.memberOne
         : conversation.memberTwo;
 
@@ -81,11 +73,7 @@ export default async function handler(
         memberId: member.id,
       },
       include: {
-        member: {
-          include: {
-            user: true,
-          },
-        },
+        member: true
       },
     });
 

@@ -33,27 +33,19 @@ export default async function handler(
         OR: [
           {
             memberOne: {
-              userId: profile.id,
+              id: profile.id,
             }
           },
           {
             memberTwo: {
-              userId: profile.id,
+              id: profile.id,
             }
           }
         ]
       },
       include: {
-        memberOne: {
-          include: {
-            user: true,
-          }
-        },
-        memberTwo: {
-          include: {
-            user: true,
-          }
-        }
+        memberOne: true,
+        memberTwo: true,
       }
     })
 
@@ -61,7 +53,7 @@ export default async function handler(
       return res.status(404).json({ error: "Conversation not found" });
     }
 
-    const member = conversation.memberOne.userId === profile.id ? conversation.memberOne : conversation.memberTwo;
+    const member = conversation.memberOne.id === profile.id ? conversation.memberOne : conversation.memberTwo;
 
     if (!member) {
       return res.status(404).json({ error: "Member not found" });
@@ -73,11 +65,7 @@ export default async function handler(
         conversationId: conversationId as string,
       },
       include: {
-        member: {
-          include: {
-            user: true,
-          }
-        }
+        member: true
       }
     })
 
@@ -86,9 +74,7 @@ export default async function handler(
     }
 
     const isMessageOwner = directMessage.memberId === member.id;
-    const isAdmin = member.role === MemberRole.ADMIN;
-    const isModerator = member.role === MemberRole.MODERATOR;
-    const canModify = isMessageOwner || isAdmin || isModerator;
+    const canModify = isMessageOwner;
 
     if (!canModify) {
       return res.status(401).json({ error: "Unauthorized" });
@@ -105,11 +91,7 @@ export default async function handler(
           deleted: true,
         },
         include: {
-          member: {
-            include: {
-              user: true,
-            }
-          }
+          member: true
         }
       })
     }
@@ -127,11 +109,7 @@ export default async function handler(
           content,
         },
         include: {
-          member: {
-            include: {
-              user: true,
-            }
-          }
+          member: true
         }
       })
     }

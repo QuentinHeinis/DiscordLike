@@ -35,11 +35,7 @@ export async function GET(req: Request) {
           conversationId,
         },
         include: {
-          member: {
-            include: {
-              user: true,
-            },
-          },
+          member: true,
         },
         orderBy: {
           createdAt: "desc",
@@ -52,11 +48,7 @@ export async function GET(req: Request) {
           conversationId,
         },
         include: {
-          member: {
-            include: {
-              user: true,
-            },
-          },
+          member: true,
         },
         orderBy: {
           createdAt: "desc",

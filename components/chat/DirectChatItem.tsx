@@ -18,32 +18,25 @@ import { PencilIcon, ShieldCheckIcon, ShieldExclamationIcon, TrashIcon } from "@
 interface ChatItemProps {
   id: string;
   content: string;
-  member: Member & {
-    user: User;
-  };
+  user: User;
   timestamp: string;
   fileUrl: string | null;
   deleted: boolean;
-  currentMember: Member;
+  currentMember: User;
   isUpdated: boolean;
   socketUrl: string;
   socketQuery: Record<string, string>;
 };
 
-const roleIconMap = {
-  "MEMBER": null,
-  "MODERATOR": <ShieldCheckIcon className="h-4 w-4 ml-2 text-indigo-500" />,
-  "ADMIN": <ShieldExclamationIcon className="h-4 w-4 ml-2 text-rose-500" />,
-}
 
 const formSchema = z.object({
   content: z.string().min(1),
 });
 
-export const ChatItem = ({
+export const DirectChatItem = ({
   id,
   content,
-  member,
+  user,
   timestamp,
   fileUrl,
   deleted,
@@ -58,11 +51,11 @@ export const ChatItem = ({
   const {setModalOpen} = useStore();
 
   const onMemberClick = () => {
-    if (member.id === currentMember.id) {
+    if (user.id === currentMember.id) {
       return;
     }
   
-    router.push(`/messages/${member.user.id}`);
+    router.push(`/messages/${user.id}`);
   }
 
   useEffect(() => {
@@ -116,12 +109,9 @@ export const ChatItem = ({
     }
   } = useForm<FieldValues>();
 
-  
 
-  const isAdmin = currentMember.role === MemberRole.ADMIN;
-  const isModerator = currentMember.role === MemberRole.MODERATOR;
-  const isOwner = currentMember.id === member.id;
-  const canDeleteMessage = !deleted && (isAdmin || isModerator || isOwner);
+  const isOwner = currentMember.id === user.id;
+  const canDeleteMessage = !deleted && isOwner;
 
 
   return (
@@ -129,12 +119,12 @@ export const ChatItem = ({
       <div className="group flex gap-x-2 items-start w-full">
         <div onClick={onMemberClick} className="cursor-pointer hover:drop-shadow-md transition">
           {
-            member.user.imageUrl ? 
-              <Image src={member.user.imageUrl} alt={`photo de profil de ${member.user.name}`} />
+            user.imageUrl ? 
+              <Image src={user.imageUrl} alt={`photo de profil de ${user.name}`} />
               :
               <div className="flex items-center justify-center w-12 h-12 bg-primary rounded-full">
                 <p className="text-white text-xl font-semibold">
-                  {member.user.name.charAt(0)}
+                  {user.name.charAt(0)}
                 </p>
               </div>
           }
@@ -143,11 +133,8 @@ export const ChatItem = ({
           <div className="flex items-center gap-x-2">
             <div className="flex items-center">
               <p onClick={onMemberClick} className="font-semibold text-sm hover:underline cursor-pointer">
-                {member.user.name}
+                {user.name}
               </p>
-              {
-                roleIconMap[member.role]
-              }
             </div>
             <span className="text-xs text-zinc-500 dark:text-zinc-400">
               {timestamp}
@@ -171,7 +158,7 @@ export const ChatItem = ({
               onClick={() =>setModalOpen('deleteMessage',{ 
                 apiUrl: `${socketUrl}/${id}`,
                 query: socketQuery,
-                userId: currentMember.userId
+                userId: currentMember.id
                })
               }
               className="cursor-pointer ml-auto w-4 h-4 text-zinc-500 hover:text-zinc-600 dark:hover:text-zinc-300 transition"
