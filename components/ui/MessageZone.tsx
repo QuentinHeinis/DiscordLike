@@ -9,9 +9,9 @@ import { useChatSocket } from "@/hook/UseChatSocket";
 import { useChatScroll } from "@/hook/UseChatScroll";
 import { ChatItem } from "../chat/ChatItem";
 import { ChatWelcome } from "../chat/ChatWelcome";
-import { ArrowPathIcon } from "@heroicons/react/24/solid";
-import { DirectChatItem } from "../chat/DirectChatItem";
 
+// import { ChatWelcome } from "./chat-welcome";
+// import { ChatItem } from "./chat-item";
 
 const DATE_FORMAT = "d MMM yyyy, HH:mm";
 
@@ -20,13 +20,10 @@ type MessageWithMemberWithProfile = Message & {
     user: User
   }
 }
-type DirectMessageWithMemberWithProfile = Message & {
-  member: User
-}
 
 interface ChatMessagesProps {
   name: string;
-  member: Member | User;
+  member: Member;
   chatId: string;
   apiUrl: string;
   socketUrl: string;
@@ -78,7 +75,7 @@ export const ChatMessages = ({
   if (status === "loading") {
     return (
       <div className="flex flex-col flex-1 justify-center items-center">
-        <ArrowPathIcon className="h-7 w-7 text-zinc-500 animate-spin my-4" />
+        {/* <Loader2 className="h-7 w-7 text-zinc-500 animate-spin my-4" /> */}
         <p className="text-xs text-zinc-500 dark:text-zinc-400">
           Loading messages...
         </p>
@@ -119,54 +116,27 @@ export const ChatMessages = ({
           )}
         </div>
       )}
-      {
-        type === "channel" ? (
-          <div className="flex flex-col-reverse mt-auto">
-            {data?.pages?.map((group, i) => (
-              <Fragment key={i}>
-                {group.items.map((message: MessageWithMemberWithProfile) => (
-                  <ChatItem
-                    key={message.id}
-                    id={message.id}
-                    currentMember={member}
-                    member={message.member}
-                    content={message.content}
-                    fileUrl={message.fileUrl}
-                    deleted={message.deleted}
-                    timestamp={format(new Date(message.createdAt), DATE_FORMAT)}
-                    isUpdated={message.updatedAt !== message.createdAt}
-                    socketUrl={socketUrl}
-                    socketQuery={socketQuery}
-                  />
-                ))}
-              </Fragment>
+      <div className="flex flex-col-reverse mt-auto">
+        {data?.pages?.map((group, i) => (
+          <Fragment key={i}>
+            {group.items.map((message: MessageWithMemberWithProfile) => (
+              <ChatItem
+                key={message.id}
+                id={message.id}
+                currentMember={member}
+                member={message.member}
+                content={message.content}
+                fileUrl={message.fileUrl}
+                deleted={message.deleted}
+                timestamp={format(new Date(message.createdAt), DATE_FORMAT)}
+                isUpdated={message.updatedAt !== message.createdAt}
+                socketUrl={socketUrl}
+                socketQuery={socketQuery}
+              />
             ))}
-          </div>
-        ) : (
-          <div className="flex flex-col-reverse mt-auto">
-            {data?.pages?.map((group, i) => (
-              <Fragment key={i}>
-                {group.items.map((message: DirectMessageWithMemberWithProfile) => (
-                  <DirectChatItem
-                    key={message.id}
-                    id={message.id}
-                    currentMember={member}
-                    member={message.member}
-                    content={message.content}
-                    fileUrl={message.fileUrl}
-                    deleted={message.deleted}
-                    timestamp={format(new Date(message.createdAt), DATE_FORMAT)}
-                    isUpdated={message.updatedAt !== message.createdAt}
-                    socketUrl={socketUrl}
-                    socketQuery={socketQuery}
-                  />
-                ))}
-              </Fragment>
-            ))}
-          </div>
-        )
-      }
-                        
+          </Fragment>
+        ))}
+      </div>
       <div ref={bottomRef} />
     </div>
   )

@@ -45,6 +45,9 @@ const SecondaryNav = async({type, id} : NavigationType) => {
     });
 
     const orderByLastMessage = usersWithConversation.sort((a, b) => {
+      //check if usersWithConversation is not empty
+      if(a.directMessages.length === 0) return 1
+      if(b.directMessages.length === 0) return -1
       return a.directMessages[0].createdAt < b.directMessages[0].createdAt ? 1 : -1
     })
 

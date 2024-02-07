@@ -30,14 +30,6 @@ const Item = ({label, icon, link} : ItemType) =>{
 
 const FriendsNav = ({conversation} : {conversation:User[]}) => {
 
-
-  console.log(conversation)
-  
-  
-  
-  
-  
-
   return (
     <div className='w-64 bg-slate-900 flex-none flex flex-col justify-between max-h-dvh'>
       <div className="p-2">
