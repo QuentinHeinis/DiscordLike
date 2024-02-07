@@ -22,9 +22,6 @@ const Modal = () => {
       case 'addChannel':
         setName('Create a channel')
         break
-      case 'searchServer':
-        setName('Search for a server')
-        break
       case 'updateChannel':
         setName('Update a channel')
         break
@@ -42,8 +39,6 @@ const Modal = () => {
       case 'none':
         return 
       case 'addServer':
-        return <CreateServerForm/>
-      case 'searchServer':
         return <CreateServerForm/>
       case 'addChannel':
         return <CreateChannel/>
