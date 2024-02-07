@@ -12,14 +12,16 @@ const ServersNav =  async ({server} : {server:any}) => {
 const user = await getCurrentUser()
 
 const checkModo = server.members.find((member:Member) => member.userId === user?.id && (member.role === "ADMIN" || member.role === "MODERATOR"))
+const checkOwner = server.members.find((member:Member) => member.userId === user?.id && member.role === "ADMIN")
+
 
 const isModo = checkModo ? true : false
 
-
+const isOwner = checkOwner ? true : false
 
   return (
     <div>
-      <ServerHeader serverName={server.name} inviteCode={server.inviteCode} server={server}/>
+      <ServerHeader serverName={server.name} inviteCode={server.inviteCode} server={server} isModo={isModo} isOwner={isOwner}/>
       <ServerChannel channels={server.channels} serverId={server.id} isModo={isModo}/>
       <ServerMember members={server.members}/>
     </div>

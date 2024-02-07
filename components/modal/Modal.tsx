@@ -8,6 +8,7 @@ import UpdateChannel from "../form/modalForm/UpdateChannelForm"
 import { DeleteMessageModal } from "../form/modalForm/DeleteMessageForm"
 import UpdateServer from "../form/modalForm/UpdateServerForm"
 import UpdateProfil from "../form/modalForm/UpdateProfilForm"
+import { LeaveServer } from "../form/modalForm/LeaveServerForm"
 
 const Modal = () => {
   const {modalOpen, setModalOpen} = useStore()
@@ -34,6 +35,9 @@ const Modal = () => {
       case 'updateProfile':
         setName('Update your profile')
         break
+      case 'leaveServer':
+        setName('Leave server')
+        break
       default:
         return
     }
@@ -56,6 +60,8 @@ const Modal = () => {
         return <UpdateServer/>
       case 'updateProfile':
         return <UpdateProfil/>
+      case 'leaveServer':
+        return <LeaveServer/>
       default:
         return
     }
