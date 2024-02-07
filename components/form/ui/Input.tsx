@@ -25,6 +25,7 @@ const Input: React.FC<InputProps> = ({
   errors,
   type = 'text',
   disabled,
+  ...props
 }) => {
   return ( 
     <div>
@@ -46,6 +47,7 @@ const Input: React.FC<InputProps> = ({
           type={type}
           autoComplete={id}
           disabled={disabled}
+          {...props}
           {...register(id, { required })}
           className={`
             form-input

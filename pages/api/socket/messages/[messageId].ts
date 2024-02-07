@@ -7,9 +7,9 @@ import db from "@/lib/prismadb";
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponseServerIo,
+  res: NextApiResponseServerIo
 ) {
-  if (req.method !== "DELETE" && req.method !== "PATCH") {
+  if (req.method !== "POST" && req.method !== "PATCH") {
     return res.status(405).json({ error: "Method not allowed" });
   }
 
@@ -17,7 +17,6 @@ export default async function handler(
     const profile = await currentProfilePages(req.body.userId);
     const { messageId, serverId, channelId } = req.query;
     const { content } = req.body;
-
     if (!profile) {
       return res.status(401).json({ error: "Unauthorized" });
     }
@@ -36,13 +35,13 @@ export default async function handler(
         members: {
           some: {
             userId: profile.id,
-          }
-        }
+          },
+        },
       },
       include: {
         members: true,
-      }
-    })
+      },
+    });
 
     if (!server) {
       return res.status(404).json({ error: "Server not found" });
@@ -54,12 +53,14 @@ export default async function handler(
         serverId: serverId as string,
       },
     });
-  
+
     if (!channel) {
       return res.status(404).json({ error: "Channel not found" });
     }
 
-    const member = server.members.find((member) => member.userId === profile.id);
+    const member = server.members.find(
+      (member) => member.userId === profile.id
+    );
 
     if (!member) {
       return res.status(404).json({ error: "Member not found" });
@@ -74,10 +75,10 @@ export default async function handler(
         member: {
           include: {
             user: true,
-          }
-        }
-      }
-    })
+          },
+        },
+      },
+    });
 
     if (!message || message.deleted) {
       return res.status(404).json({ error: "Message not found" });
@@ -92,7 +93,7 @@ export default async function handler(
       return res.status(401).json({ error: "Unauthorized" });
     }
 
-    if (req.method === "DELETE") {
+    if (req.method === "POST") {
       message = await db.message.update({
         where: {
           id: messageId as string,
@@ -106,10 +107,10 @@ export default async function handler(
           member: {
             include: {
               user: true,
-            }
-          }
-        }
-      })
+            },
+          },
+        },
+      });
     }
 
     if (req.method === "PATCH") {
@@ -128,10 +129,10 @@ export default async function handler(
           member: {
             include: {
               user: true,
-            }
-          }
-        }
-      })
+            },
+          },
+        },
+      });
     }
 
     const updateKey = `chat:${channelId}:messages:update`;

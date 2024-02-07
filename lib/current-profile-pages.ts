@@ -1,9 +1,6 @@
-import { NextApiRequest } from "next";
-
 import db from "@/lib/prismadb";
 
-export const currentProfilePages = async (userId : string) => {
-
+export const currentProfilePages = async (userId: string) => {
   if (!userId) {
     return null;
   }
@@ -13,6 +10,9 @@ export const currentProfilePages = async (userId : string) => {
       id: userId,
     },
   });
+  if (!profile) {
+    return userId;
+  }
 
   return profile;
 };
