@@ -20,7 +20,7 @@ const Item = ({label, icon, link} : ItemType) =>{
         icon === 'friend' ?
         <UserCircleIcon className='h-6 w-6 text-zinc-500'/>
         : (
-          icon ? <Image src={icon} alt="" width={32} height={32} className='h-6 w-6 rounded-full'/> : <div className='h-6 w-6 grid place-content-center rounded-full bg-blue-600'>{label.charAt(0)}</div>
+          icon ? <Image src={icon} alt="" width={32} height={32} className='h-6 w-6 rounded-full'/> : <div className='h-6 w-6 grid place-content-center rounded-full bg-indigo-700'>{label.charAt(0)}</div>
         )
       }
       {label}

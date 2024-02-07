@@ -34,7 +34,7 @@ const Button: React.FC<ButtonProps> = ({
         focus-visible:outline 
         focus-visible:outline-2 
         focus-visible:outline-offset-2 
-        ${secondary ? secondaryStyle : 'bg-blue-600'}
+        ${secondary ? secondaryStyle : 'bg-indigo-700'}
         `}
     >
       {children}

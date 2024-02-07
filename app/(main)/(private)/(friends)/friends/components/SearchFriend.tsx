@@ -19,7 +19,7 @@ const SearchFriend = ({friends} : {friends:User[]}) => {
           filteredFriends.map(friend => (
             <div key={friend.id} className="flex w-3/4 justify-between text-xl border-b px-3 hover:bg-gray-600 transition-all">
               <Link href={`/messages/${friend.id}`} className="flex gap-4 w-full py-6">
-                {friend.imageUrl ? <Image src={friend.imageUrl} alt="" width={32} height={32} className='h-8 w-8 rounded-full'/> : <div className='h-8 w-8 grid place-content-center rounded-full bg-blue-600'>{friend.name.charAt(0)}</div> }
+                {friend.imageUrl ? <Image src={friend.imageUrl} alt="" width={32} height={32} className='h-8 w-8 rounded-full'/> : <div className='h-8 w-8 grid place-content-center rounded-full bg-indigo-700'>{friend.name.charAt(0)}</div> }
                 {friend.name}
               </Link>
               <div className="flex gap-2 py-6">

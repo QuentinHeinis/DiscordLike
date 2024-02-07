@@ -59,7 +59,7 @@ const MessageInput = ({apiUrl, query, name, type, userId} : ChatInputProps) => {
       {...register('content', {required: true})} onChange={handleChange} value={input}
        name="content" id='content' className="w-full px-3 bg-transparent max-h-fit h-8 p-1 focus:outline-none resize-none" placeholder={inputPlaceholder}/>
      {
-        input.length > 0 &&  <button type='submit'><PaperAirplaneIcon className="h-8 w-8 rounded-full bg-blue-500 flex-none p-2"/></button>
+        input.length > 0 &&  <button type='submit'><PaperAirplaneIcon className="h-8 w-8 rounded-full bg-indigo-700 flex-none p-2"/></button>
      }
     </form>
   )

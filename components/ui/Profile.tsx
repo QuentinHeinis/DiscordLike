@@ -13,7 +13,7 @@ const Profile = async ({user} : {user:User}) => {
           ? 
           <Image src={image} alt="" width={56} height={56} className='h-6 w-6 rounded-full'/> 
           :
-          <div className="h-6 w-6 grid place-content-center rounded-full bg-blue-600" >{name?.slice(0,1).toUpperCase()}</div>
+          <div className="h-6 w-6 grid place-content-center rounded-full bg-indigo-700" >{name?.slice(0,1).toUpperCase()}</div>
         }
         <span>{name}</span>
       </div>

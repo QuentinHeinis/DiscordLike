@@ -132,7 +132,7 @@ export const ChatItem = ({
             member.user.imageUrl ? 
               <Image src={member.user.imageUrl} alt={`photo de profil de ${member.user.name}`} width={48} height={48}  className="block h-full w-full object-cover"/>
               :
-              <div className="flex items-center justify-center w-12 h-12 bg-blue-600 rounded-full">
+              <div className="flex items-center justify-center w-12 h-12 bg-indigo-700 rounded-full">
                 <p className="text-white text-xl font-semibold">
                   {member.user.name.charAt(0)}
                 </p>
