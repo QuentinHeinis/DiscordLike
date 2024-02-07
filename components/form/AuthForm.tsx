@@ -90,6 +90,7 @@ const AuthForm = () => {
           className="space-y-6" 
           onSubmit={handleSubmit(onSubmit)}
         >
+          <h1 className="font-bold text-center text-xl">Bienvenue sur Suihira !</h1>
           {variant === 'REGISTER' && (
             <Input
               disabled={isLoading}
