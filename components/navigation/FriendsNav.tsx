@@ -15,7 +15,7 @@ const Item = ({label, icon, link} : ItemType) =>{
   const pathname = usePathname()
   const {setMenuOpen} = useStore()
   return(
-    <Link onClick={()=>setMenuOpen(false)} href={link}  className={`w-full h-12 flex items-center transition-colors cursor-pointer hover:bg-slate-600 px-4 gap-2 rounded-md ${pathname === link ? 'bg-slate-600' : ''}`}>
+    <Link onClick={()=>setMenuOpen(false)} href={link}  className={`w-full h-12 flex items-center transition-colors cursor-pointer hover:bg-gray-600 px-4 gap-2 rounded-md ${pathname === link ? 'bg-gray-600' : ''}`}>
       {
         icon === 'friend' ?
         <UserCircleIcon className='h-6 w-6 text-zinc-500'/>
@@ -31,10 +31,10 @@ const Item = ({label, icon, link} : ItemType) =>{
 const FriendsNav = ({conversation} : {conversation:User[]}) => {
 
   return (
-    <div className='w-64 bg-slate-900 flex-none flex flex-col justify-between  max-h-dvh'>
+    <div className='w-64 bg-gray-900 flex-none flex flex-col justify-between  max-h-dvh'>
       <div className='p-2'>
         <Item link='/friends' label="Amis" icon={'friend'}/>
-        <p className='text-xs py-2 flex items-center gap-2 after:bg-slate-400  after:h-[2px] after:w-full'>Messages&nbsp;privés</p>
+        <p className='text-xs py-2 flex items-center gap-2 after:bg-gray-400  after:h-[2px] after:w-full'>Messages&nbsp;privés</p>
       </div>
       <div className="p-2 absolute top-20 bottom-20 right-0 left-0 overflow-auto">
         {

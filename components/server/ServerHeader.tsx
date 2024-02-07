@@ -37,12 +37,12 @@ const handleCopy = (code:string) => {
 const ServerHeader = ({serverName, inviteCode, server, isModo, isOwner}:ServerHeaderType) => {
   const {setModalOpen} = useStore()
   return (
-      <div className='group flex-none relative w-full bg-slate-500 flex justify-around items-center h-16 border-b border-slate-200'>
-        <p className='text-xl font-bold text-slate-100'>{serverName}</p>
+      <div className='group flex-none relative w-full bg-gray-500 flex justify-around items-center h-16 border-b border-gray-200'>
+        <p className='text-xl font-bold text-gray-100'>{serverName}</p>
         <div>
           <ChevronDownIcon className='group-hover:rotate-180 transition-all h-6 w-6'/>
         </div>
-        <div className='h-0 z-50 group-hover:h-fit group-hover:visible pt-2 pb-2 transition-all scale-50 invisible flex gap-1 flex-col items-center group-hover:scale-100 overflow-hidden absolute w-[95%] bg-slate-500 top-full border-t'>
+        <div className='h-0 z-50 group-hover:h-fit group-hover:visible pt-2 pb-2 transition-all scale-50 invisible flex gap-1 flex-col items-center group-hover:scale-100 overflow-hidden absolute w-[95%] bg-gray-500 top-full border-t'>
           <button className="w-5/6" onClick={()=>handleCopy(inviteCode)}><ServerUtils text='Inviter des gens' icon={<ClipboardIcon className='h-4'/>}/></button>
           {
             isModo && 

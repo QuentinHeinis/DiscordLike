@@ -20,7 +20,7 @@ const ServerList = ({servers} : {servers:Server[]}) => {
           ))}
       </ReactSortable>
       
-      <button onClick={()=>setModalOpen('addServer')} className='bg-slate-500 h-14 w-14 rounded-full grid place-content-center mt-3'><PlusIcon className='h-8 w-8'/></button>
+      <button onClick={()=>setModalOpen('addServer')} className='bg-gray-500 h-14 w-14 rounded-full grid place-content-center mt-3'><PlusIcon className='h-8 w-8'/></button>
     </>
   )
 }

@@ -16,7 +16,7 @@ const ServerBubble = ({link, isHome, img, name}:BubbleType) => {
   const linkId = link.split('/')[2]
   return(
     <div className={`after:h-14 after:bg-white after:rounded-tr-xl after:rounded-br-xl after:w-1 after:-translate-y-full after:relative after:-left-3  ${getId === linkId ? 'after:flex -mb-14' : 'after:hidden'}`}>
-      <Link href={link}  className={`group relative bg-slate-500 flex h-14 w-14  ${isHome && 'p-2 rounded-lg justify-center items-center'} ${!isHome && 'rounded-full'}`}>
+      <Link href={link}  className={`group relative bg-gray-500 flex h-14 w-14  ${isHome && 'p-2 rounded-lg justify-center items-center'} ${!isHome && 'rounded-full'}`}>
         {isHome ? <BoltIcon className="h-6 w-6 text-white"/>
         :
         img ?
@@ -26,7 +26,7 @@ const ServerBubble = ({link, isHome, img, name}:BubbleType) => {
             {name.slice(0,1).toUpperCase()}
           </div>
         }
-        <span className='md:group-hover:flex z-40 group-hover:visible hidden invisible rounded-md absolute top-[16.666%] h-2/3 items-center px-4 ml-4 left-full min-w-max bg-slate-800 after:h-3 after:w-3 after:bg-slate-800 after:absolute after:left-0 after:-translate-x-1/2 after:rotate-45 after:rounded-sm'>{name}</span>
+        <span className='md:group-hover:flex z-40 group-hover:visible hidden invisible rounded-md absolute top-[16.666%] h-2/3 items-center px-4 ml-4 left-full min-w-max bg-gray-800 after:h-3 after:w-3 after:bg-gray-800 after:absolute after:left-0 after:-translate-x-1/2 after:rotate-45 after:rounded-sm'>{name}</span>
       </Link>
     </div>
   )
