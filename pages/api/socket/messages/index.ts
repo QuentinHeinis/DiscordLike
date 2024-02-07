@@ -14,7 +14,6 @@ export default async function handler(
 
   try {
     const profile = await currentProfilePages(req.body.userId);
-    return res.status(200).json({profile});
     const { content, fileUrl } = req.body;
     const { serverId, channelId } = req.query;
     
