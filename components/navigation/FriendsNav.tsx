@@ -11,7 +11,7 @@ import { Conversation, User } from '@prisma/client';
 
 type ItemType = {
   label: string,
-  icon:string,
+  icon:string | null,
   link: string
 }
 const Item = ({label, icon, link} : ItemType) =>{
@@ -50,9 +50,6 @@ const FriendsNav = ({conversation} : {conversation:User[]}) => {
           conversation.map((user:User) => (
             <Item link={`/messages/${user.id}`} key={user.id} label={user.name} icon={user.imageUrl}/>
           ))
-          // Friends.map((friend:FriendType) => (
-          //   <Item link={friend.link} key={friend.id} label={friend.name} icon={<Image src={friend.img} alt="" width={56} height={56} className='h-6 w-6 rounded-full'/>}/>
-          // ))
         }
       </div>
     </div>
