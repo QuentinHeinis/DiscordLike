@@ -26,7 +26,7 @@ const ServerBubble = ({link, isHome, img, name}:BubbleType) => {
             {name.slice(0,1).toUpperCase()}
           </div>
         }
-        <span className='md:group-hover:flex z-40 group-hover:visible hidden invisible rounded-md absolute top-[16.666%] h-2/3 items-center px-4 ml-4 left-full min-w-max bg-neutral-800 after:h-3 after:w-3 after:bg-neutral-800 after:absolute after:left-0 after:-translate-x-1/2 after:rotate-45 after:rounded-sm'>{name}</span>
+        <span className='md:group-hover:flex z-40 group-hover:visible hidden invisible rounded-md absolute top-[16.666%] h-2/3 items-center px-4 ml-4 left-full min-w-max bg-neutral-600 border border-neutral-700 after:h-3 after:w-3 after:bg-neutral-600 after:border-l after:border-b after:border-neutral-700 after:absolute after:left-0 after:-translate-x-1/2 after:rotate-45 after:rounded-sm'>{name}</span>
       </Link>
     </div>
   )

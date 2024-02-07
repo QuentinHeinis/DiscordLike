@@ -37,7 +37,7 @@ const handleCopy = (code:string) => {
 const ServerHeader = ({serverName, inviteCode, server, isModo, isOwner}:ServerHeaderType) => {
   const {setModalOpen} = useStore()
   return (
-      <div className='group flex-none relative w-full bg-neutral-500 flex justify-around items-center h-16 border-b border-neutral-200'>
+      <div className='group flex-none relative w-full bg-neutral-600 flex justify-around items-center h-16 border-b border-neutral-200'>
         <p className='text-xl font-bold text-neutral-100'>{serverName}</p>
         <div>
           <ChevronDownIcon className='group-hover:rotate-180 transition-all h-6 w-6'/>

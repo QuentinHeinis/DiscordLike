@@ -7,7 +7,6 @@ import { Member, Message, User } from "@prisma/client";
 import { useChatQuery } from "@/hook/UseChatQuery";
 import { useChatSocket } from "@/hook/UseChatSocket";
 import { useChatScroll } from "@/hook/UseChatScroll";
-import { ChatItem } from "../chat/ChatItem";
 import { ChatWelcome } from "../chat/ChatWelcome";
 import { ArrowPathIcon } from "@heroicons/react/24/solid";
 import { DirectChatItem } from "../chat/DirectChatItem";

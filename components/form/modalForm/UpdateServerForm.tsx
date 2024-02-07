@@ -9,6 +9,7 @@ import { useState } from "react"
 import Image from "next/image"
 import { CldUploadButton } from "next-cloudinary"
 import { PencilIcon } from "@heroicons/react/24/solid"
+import toast from "react-hot-toast"
 
 
 const UpdateServer = () => {
@@ -24,6 +25,8 @@ const UpdateServer = () => {
       imageUrl : image
     }
     await axios.patch(`/api/server/${server?.id}`, dataSend)
+
+    toast.success('Serveur modifié')
     setModalOpen("none")
     router.refresh()
   }
@@ -32,6 +35,7 @@ const UpdateServer = () => {
     // handle delete channel
     await axios.post(`/api/server/${server?.id}`)
     
+    toast.success('Serveur supprimé')
     setModalOpen("none")
     router.push('/friends')
   }
@@ -47,16 +51,19 @@ const UpdateServer = () => {
 
   return (
     <div>
-      <button onClick={()=>setIsUpdate(true)}>modifier</button>
-      <button onClick={()=>setIsUpdate(false)}>supprimer</button>
+      <div className="bg-neutral-600 w-3/4 mx-auto my-5 flex">
+        <button className={`w-1/2 hover:bg-neutral-900 transition-all ${!isUpdate ? '' : 'bg-neutral-800'}`} onClick={()=>setIsUpdate(true)}>modifier</button>
+        <button className={`w-1/2 hover:bg-neutral-900 transition-all ${isUpdate ? '' : 'bg-neutral-800'}`} onClick={()=>setIsUpdate(false)}>supprimer</button>
+      </div>
       {
         isUpdate ?
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-5 items-center">
 
         <CldUploadButton 
           options={{ maxFiles: 1 }} 
           onUpload={handleUpload} 
           uploadPreset="jgueeeco"
+          className="rounded-full overflow-hidden"
         >
           <div className="group relative">
             {
@@ -83,8 +90,8 @@ const UpdateServer = () => {
           <Button type="submit">Update</Button>
         </form>
         :
-        <form onSubmit={handleSubmit(onDelete)}>
-          <Button type="submit">Delete</Button>
+        <form onSubmit={handleSubmit(onDelete)}  className="flex flex-col gap-5 items-center">
+          <Button type="submit" danger={true}>Delete</Button>
         </form>
       }
     </div>

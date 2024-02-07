@@ -35,6 +35,8 @@ const Button: React.FC<ButtonProps> = ({
         focus-visible:outline-2 
         focus-visible:outline-offset-2 
         ${secondary ? secondaryStyle : 'bg-indigo-700'}
+        ${danger ? 'bg-red-600' : ''}
+        ${fullWidth && 'w-full'}
         `}
     >
       {children}

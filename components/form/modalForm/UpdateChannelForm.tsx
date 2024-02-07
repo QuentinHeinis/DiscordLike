@@ -8,6 +8,7 @@ import { ChannelType } from "@prisma/client"
 import { useParams, useRouter } from "next/navigation"
 import { useStore } from "@/store/zustand"
 import { useState } from "react"
+import toast from "react-hot-toast"
 
 
 const UpdateChannel = () => {
@@ -24,6 +25,7 @@ const UpdateChannel = () => {
     }
 
     await axios.patch(`/api/server/channel/${currentUpdateId}`, dataSend)
+    toast.success('Channel modifié')
     setModalOpen("none")
     router.refresh()
   }
@@ -36,6 +38,7 @@ const UpdateChannel = () => {
     
     await axios.post(`/api/server/channel/${currentUpdateId}`, dataSend)
     
+    toast.success('Channel supprimé')
     setModalOpen("none")
     router.refresh()
   }
@@ -55,24 +58,26 @@ const UpdateChannel = () => {
 
   return (
     <div>
-      <button onClick={()=>setIsUpdate(true)}>modifier</button>
-      <button onClick={()=>setIsUpdate(false)}>supprimer</button>
+      <div className="bg-neutral-600 w-3/4 mx-auto my-5 flex">
+        <button className={`w-1/2 hover:bg-neutral-900 transition-all ${!isUpdate ? '' : 'bg-neutral-800'}`} onClick={()=>setIsUpdate(true)}>modifier</button>
+        <button className={`w-1/2 hover:bg-neutral-900 transition-all ${isUpdate ? '' : 'bg-neutral-800'}`} onClick={()=>setIsUpdate(false)}>supprimer</button>
+      </div>
       {
         isUpdate ?
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-5 items-center">
           <Input
             register={register}
             errors={errors}
             required
             id="name" 
-            label="Nom du serveur"
+            label="Nom du channel"
           />
-          <Select errors={errors} required options={options} id="type" label="Type" register={register}/>
-          <Button type="submit">Update</Button>
+          <Select fullWidth={true} errors={errors} required options={options} id="type" label="Type" register={register}/>
+          <Button type="submit">Modifier</Button>
         </form>
         :
-        <form onSubmit={handleSubmit(onDelete)}>
-          <Button type="submit">Delete</Button>
+        <form onSubmit={handleSubmit(onDelete)}  className="flex flex-col gap-5 items-center">
+          <Button type="submit" danger>Supprimer</Button>
         </form>
       }
     </div>

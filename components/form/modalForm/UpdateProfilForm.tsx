@@ -36,12 +36,13 @@ const UpdateProfil = () => {
 
 
   return (
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-5 items-center">
 
         <CldUploadButton 
           options={{ maxFiles: 1 }} 
           onUpload={handleUpload} 
           uploadPreset="jgueeeco"
+          className="rounded-full overflow-hidden"
         >
           <div className="group relative">
             {

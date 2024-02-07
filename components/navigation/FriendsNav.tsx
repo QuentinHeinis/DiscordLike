@@ -31,7 +31,7 @@ const Item = ({label, icon, link} : ItemType) =>{
 const FriendsNav = ({conversation} : {conversation:User[]}) => {
 
   return (
-    <div className='w-64 bg-neutral-900 flex-none flex flex-col justify-between  max-h-dvh'>
+    <div className='w-64 bg-neutral-800 flex-none flex flex-col justify-between  max-h-dvh'>
       <div className='p-2'>
         <Item link='/friends' label="Amis" icon={'friend'}/>
         <p className='text-xs py-2 flex items-center gap-2 after:bg-neutral-400  after:h-[2px] after:w-full'>Messages&nbsp;privés</p>

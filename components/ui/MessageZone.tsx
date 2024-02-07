@@ -9,6 +9,7 @@ import { useChatSocket } from "@/hook/UseChatSocket";
 import { useChatScroll } from "@/hook/UseChatScroll";
 import { ChatItem } from "../chat/ChatItem";
 import { ChatWelcome } from "../chat/ChatWelcome";
+import { ArrowPathIcon } from "@heroicons/react/24/solid";
 
 // import { ChatWelcome } from "./chat-welcome";
 // import { ChatItem } from "./chat-item";
@@ -75,7 +76,7 @@ export const ChatMessages = ({
   if (status === "loading") {
     return (
       <div className="flex flex-col flex-1 justify-center items-center">
-        {/* <Loader2 className="h-7 w-7 text-neutral-500 animate-spin my-4" /> */}
+        <ArrowPathIcon className="h-7 w-7 text-neutral-500 animate-spin my-4" />
         <p className="text-xs text-neutral-500 dark:text-neutral-400">
           Loading messages...
         </p>

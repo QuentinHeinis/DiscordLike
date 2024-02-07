@@ -5,6 +5,7 @@ import axios from "axios"
 import { useRouter } from "next/navigation"
 import { useStore } from "@/store/zustand"
 import { MemberRole } from "@prisma/client"
+import toast from "react-hot-toast"
 
 const UpdateMember = () => {
   const router = useRouter()
@@ -21,6 +22,8 @@ const UpdateMember = () => {
       }
       
       await axios.patch(`/api/member`, dataSend)
+
+      toast.success('Membre modifié')
     }
     finally{
       setModalOpen("none")
@@ -41,7 +44,7 @@ const UpdateMember = () => {
             }
           
           </select>
-          <Button type="submit">Update</Button>
+          <Button type="submit">Modifier</Button>
         </form>
   )
 }

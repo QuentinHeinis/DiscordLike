@@ -5,6 +5,7 @@ import axios from "axios";
 import { useStore } from "@/store/zustand";
 import Button from "@/components/form/ui/Button";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 
 export const LeaveServer = () => {
   const {  handleSubmit } = useForm<FieldValues>()
@@ -15,7 +16,7 @@ export const LeaveServer = () => {
   const handleDelete:SubmitHandler<FieldValues>  = async (data) => {
     try {
       await axios.patch(`/api/server/${server?.id}/leave`); // post as delete
-
+      toast.success('Serveur quitté')
     } catch (error) {
       console.log(error);
     } finally{

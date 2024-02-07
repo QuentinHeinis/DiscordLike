@@ -51,7 +51,7 @@ const AuthForm = () => {
        axios.post('/api/register', data)
        .then(()=>signIn('credentials', data))
        .catch(()=>{
-        toast.error('Something went wrong')
+        toast.error('Quelque chose s\'est mal passé !')
        })
        .finally(()=>setIsLoading(false))
     }
@@ -65,7 +65,7 @@ const AuthForm = () => {
           toast.error('Invalid credentials')
         }
         if(callback?.ok && !callback?.error) {
-          toast.success('Logged in !')
+          toast.success('Connecté !')
           router.push('/friends')
         }
       })
@@ -74,14 +74,11 @@ const AuthForm = () => {
 
   }
 
-  const socialAction = (action: string) => {
-  } 
-
   return ( 
     <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
       <div 
         className="
-        bg-white
+        bg-neutral-700
           px-4
           py-8
           shadow
@@ -100,7 +97,7 @@ const AuthForm = () => {
               errors={errors}
               required
               id="name" 
-              label="Name"
+              label="Surnom"
             />
           )}
           <Input 
@@ -109,7 +106,7 @@ const AuthForm = () => {
             errors={errors}
             required
             id="email" 
-            label="Email address" 
+            label="Adresse email" 
             type="email"
           />
           <Input 
@@ -118,12 +115,12 @@ const AuthForm = () => {
             errors={errors}
             required
             id="password" 
-            label="Password" 
+            label="Mot de passe" 
             type="password"
           />
           <div>
             <Button disabled={isLoading} fullWidth type="submit">
-              {variant === 'LOGIN' ? 'Sign in' : 'Register'}
+              {variant === 'LOGIN' ? 'Se connecter' : 'Créer un compte'}
             </Button>
           </div>
         </form>
@@ -135,17 +132,17 @@ const AuthForm = () => {
             text-sm 
             mt-6 
             px-2 
-            text-neutral-500
+            text-neutral-300
           "
         >
           <div>
-            {variant === 'LOGIN' ? 'New to Messenger?' : 'Already have an account?'} 
+            {variant === 'LOGIN' ? 'Nouveau sur Suihira?' : 'Vous avez déjà un compte ?'} 
           </div>
           <div 
             onClick={toggleVariant} 
             className="underline cursor-pointer"
           >
-            {variant === 'LOGIN' ? 'Create an account' : 'Login'}
+            {variant === 'LOGIN' ? 'Créez un compte' : 'Se connecter'}
           </div>
         </div>
       </div>

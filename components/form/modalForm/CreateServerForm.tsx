@@ -5,19 +5,29 @@ import Button from "../ui/Button"
 import axios from "axios"
 import { CldUploadButton } from "next-cloudinary"
 import Image from "next/image"
-import { useRouter } from "next/navigation"
+import { redirect, useRouter } from "next/navigation"
+import { useStore } from "@/store/zustand"
+import toast from "react-hot-toast"
 
 const AddServer = () => {
   const { register, handleSubmit, formState: { errors }, setValue, watch } = useForm<FieldValues>()
+  const {setModalOpen} = useStore()
   const router = useRouter();
+  const image = watch('image');
   const onSubmit:SubmitHandler<FieldValues> = async (data) => {
     // handle create server
-    await axios.post('/api/server', data)
-    router.refresh();
+
+    if(!image){
+      toast.error('Veuillez ajouter une image')
+    }else{
+      await axios.post('/api/server', data)
+      router.refresh();
+    }
+    
   }
   
   
-  const image = watch('image');
+  
   
   const handleUpload = (result: any) => {
     setValue('image', result.info.secure_url, { 
@@ -25,7 +35,7 @@ const AddServer = () => {
     });
   }
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSubmit)}  className="flex flex-col gap-5 items-center">
         {image && <Image src={image} alt="server image" width={100} height={100} />}
         <CldUploadButton 
           options={{ maxFiles: 1 }} 

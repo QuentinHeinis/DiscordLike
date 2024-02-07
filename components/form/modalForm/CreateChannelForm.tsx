@@ -7,6 +7,7 @@ import axios from "axios"
 import { ChannelType } from "@prisma/client" 
 import { useParams, useRouter } from "next/navigation"
 import { useStore } from "@/store/zustand"
+import toast from "react-hot-toast"
 
 
 const AddChannel = () => {
@@ -22,6 +23,7 @@ const AddChannel = () => {
     }
 
     await axios.post('/api/server/channel', dataSend)
+    toast.success('Channel créé')
     setModalOpen("none")
     router.refresh()
   }
@@ -38,13 +40,13 @@ const AddChannel = () => {
   ]
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSubmit)}  className="flex flex-col gap-5 items-center">
         <Input
           register={register}
           errors={errors}
           required
           id="name" 
-          label="Nom du serveur"
+          label="Nom du channel"
         />
         <Select errors={errors} required options={options} id="type" label="Type" register={register}/>
         <Button type="submit">Créer</Button>

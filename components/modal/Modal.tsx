@@ -20,26 +20,26 @@ const Modal = () => {
       case 'none':
         return 
       case 'addServer':
-        setName('Create a server')
+        setName('Créer un serveur')
         break
       case 'addChannel':
-        setName('Create a channel')
+        setName('Créer un channel')
         break
       case 'updateChannel':
-        setName('Update a channel')
+        setName('Modifier un channel')
         break
       case 'deleteMessage':
-        setName('Delete Message')
+        setName('Supprimer un message')
         break
       case 'updateServer':
-        setName('Update a server')
+        setName('Modifier le serveur')
       case 'updateProfile':
-        setName('Update your profile')
+        setName('Modifier le profil')
         break
       case 'leaveServer':
-        setName('Leave server')
+        setName('Quitter le serveur')
       case 'updateMember':
-        setName('Update member')
+        setName('Modifier le membre')
         break
       default:
         return
@@ -76,7 +76,7 @@ const Modal = () => {
     <>
     {
       modalOpen !== 'none' &&
-      <div className="fixed top-0 left-0 w-full h-full bg-neutral-800 bg-opacity-50 z-50 flex items-center justify-center">
+      <div className="fixed text-white top-0 left-0 w-full h-full bg-neutral-800 bg-opacity-50 z-50 flex items-center justify-center">
         
         <div className="bg-neutral-700 p-4 rounded-lg w-96">
           <div className="flex justify-between items-center">
