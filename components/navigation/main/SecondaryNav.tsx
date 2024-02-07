@@ -34,12 +34,24 @@ const SecondaryNav = async({type, id} : NavigationType) => {
       include: {
         memberOne: true,
         memberTwo: true,
+        directMessages: {
+          orderBy: {
+            createdAt: 'desc'
+          },
+          take: 1
+        }
       },
+
     });
-    
+
+    const orderByLastMessage = usersWithConversation.sort((a, b) => {
+      return a.directMessages[0].createdAt < b.directMessages[0].createdAt ? 1 : -1
+    })
+
     const friends = usersWithConversation.map((conv) => {
       return conv.memberOneId === user.id ? conv.memberTwoId : conv.memberOneId
     })
+
     const friendsProfiles = await db.user.findMany({
       where: {
         id: {
@@ -47,7 +59,16 @@ const SecondaryNav = async({type, id} : NavigationType) => {
         }
       }
     })
-    console.log(friendsProfiles);
+
+    friendsProfiles.sort((a, b) => {
+      return orderByLastMessage.findIndex((conv) => {
+        return conv.memberOneId === a.id || conv.memberTwoId === a.id
+      }) < orderByLastMessage.findIndex((conv) => {
+        return conv.memberOneId === b.id || conv.memberTwoId === b.id
+      }) ? -1 : 1
+    })
+
+    
     
     return(
       <FriendsNav conversation={friendsProfiles}/>
