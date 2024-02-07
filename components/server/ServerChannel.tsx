@@ -1,5 +1,5 @@
 'use client'
-import { Cog6ToothIcon, PlusIcon } from "@heroicons/react/24/solid"
+import { Cog6ToothIcon, HashtagIcon, PlusIcon, SpeakerWaveIcon, VideoCameraIcon } from "@heroicons/react/24/solid"
 import { Channel } from "@prisma/client"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
@@ -12,7 +12,7 @@ const ChannelSection = ({type, isModo} : {type:Channel['type'], isModo:boolean})
   return (
     <p className='text-neutral-100 text-sm flex justify-between'>
       {
-        type === 'TEXT' && 'Text Channels' || type === 'AUDIO' && 'Voice Channels' || type === 'VIDEO' && 'Video Channels'
+        type === 'TEXT' && 'Channels textuels' || type === 'AUDIO' && 'Channels vocals' || type === 'VIDEO' && 'Channels vidéos'
       }
       {
         isModo && <button onClick={()=>setModalOpen('addChannel')}><PlusIcon className="h-5 w-5"/></button>
@@ -26,15 +26,19 @@ type ItemType = {
   name: string,
   serverId: string,
   isModo: boolean
+  type: Channel['type']
 }
 
-const Item = ({id, name, serverId, isModo} : ItemType ) => {
+const Item = ({id, name, serverId, isModo, type} : ItemType ) => {
   const pathname = usePathname()
   const {setModalOpen, setCurrentUpdateId} = useStore()
   const link = `/servers/${serverId}/${id}`
   return (
 <div className={`group  w-full h-12 flex items-center justify-between transition-colors cursor-pointer hover:bg-neutral-600 px-4 gap-2 rounded-md ${pathname === link ? 'bg-neutral-600' : ''}`}>
-    <Link href={link} className="w-full" >
+    <Link href={link} className="w-full flex items-center gap-2" >
+      {
+        type === 'TEXT' && <HashtagIcon className="h-5 w-5"/> || type === 'AUDIO' && <SpeakerWaveIcon className="h-5 w-5"/> || type === 'VIDEO' && <VideoCameraIcon className="h-5 w-5"/>
+      }
       <p>{name}</p>
     </Link>
     {
@@ -67,7 +71,7 @@ const ChannelTypes  = new Set(channels.map((channel:Channel) => channel.type))
             {
               channels.map((channel:Channel) => (
                 channel.type === type &&
-                <Item key={channel.id} id={channel.id} name={channel.name} serverId={serverId} isModo={isModo}/>
+                <Item key={channel.id} type={type} id={channel.id} name={channel.name} serverId={serverId} isModo={isModo}/>
               ))
             }
           </div>
