@@ -120,7 +120,7 @@ export const DirectChatItem = ({
         <div onClick={onMemberClick} className="cursor-pointer hover:drop-shadow-md transition">
           {
             user.imageUrl ? 
-              <Image src={user.imageUrl} alt={`photo de profil de ${user.name}`} />
+              <Image src={user.imageUrl} alt={`photo de profil de ${user.name}`} width={48} height={48} className="rounded-full" />
               :
               <div className="flex items-center justify-center w-12 h-12 bg-primary rounded-full">
                 <p className="text-white text-xl font-semibold">

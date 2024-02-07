@@ -127,12 +127,12 @@ export const ChatItem = ({
   return (
     <div className="relative group flex items-center hover:bg-black/5 p-4 transition w-full">
       <div className="group flex gap-x-2 items-start w-full">
-        <div onClick={onMemberClick} className="cursor-pointer hover:drop-shadow-md transition">
+        <div onClick={onMemberClick} className="cursor-pointer hover:drop-shadow-md transition h-12 w-12  rounded-full overflow-hidden object-cover">
           {
             member.user.imageUrl ? 
-              <Image src={member.user.imageUrl} alt={`photo de profil de ${member.user.name}`} />
+              <Image src={member.user.imageUrl} alt={`photo de profil de ${member.user.name}`} width={48} height={48}  className="block h-full w-full object-cover"/>
               :
-              <div className="flex items-center justify-center w-12 h-12 bg-primary rounded-full">
+              <div className="flex items-center justify-center w-12 h-12 bg-blue-600 rounded-full">
                 <p className="text-white text-xl font-semibold">
                   {member.user.name.charAt(0)}
                 </p>

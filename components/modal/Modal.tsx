@@ -7,6 +7,7 @@ import { useEffect, useState } from "react"
 import UpdateChannel from "../form/modalForm/UpdateChannelForm"
 import { DeleteMessageModal } from "../form/modalForm/DeleteMessageForm"
 import UpdateServer from "../form/modalForm/UpdateServerForm"
+import UpdateProfil from "../form/modalForm/UpdateProfilForm"
 
 const Modal = () => {
   const {modalOpen, setModalOpen} = useStore()
@@ -30,6 +31,8 @@ const Modal = () => {
         break
       case 'updateServer':
         setName('Update a server')
+      case 'updateProfile':
+        setName('Update your profile')
         break
       default:
         return
@@ -51,6 +54,8 @@ const Modal = () => {
         return <DeleteMessageModal/>
       case 'updateServer':
         return <UpdateServer/>
+      case 'updateProfile':
+        return <UpdateProfil/>
       default:
         return
     }

@@ -8,8 +8,6 @@ export default withAuth({
 export const config = {
   matcher: [
     "/friends/:path*", 
-    "/profile/:path*", 
-    "/settings/:path*", 
     "/messages/:path*",
     "/servers/:path*",
   ],

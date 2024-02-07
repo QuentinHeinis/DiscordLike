@@ -1,7 +1,7 @@
-import { Channel, ChannelType, Server } from "@prisma/client";
+import { Channel, ChannelType, Server, User } from "@prisma/client";
 import { create } from "zustand";
 
-type modalType = 'deleteMessage'|'addServer' | 'addChannel' | 'updateChannel' | 'updateServer' | 'none';
+type modalType = 'deleteMessage'|'addServer' | 'addChannel' | 'updateChannel' | 'updateServer' | 'updateProfile' | 'none';
 
 type ModalData = {
   server?: Server;
@@ -9,7 +9,8 @@ type ModalData = {
   channelType?: ChannelType;
   apiUrl?: string;
   query?: Record<string, any>;
-  userId?:string
+  userId?:string,
+  user?:User
 }
 
 type StoreType = {

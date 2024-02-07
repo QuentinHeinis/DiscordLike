@@ -17,7 +17,7 @@ const Profile = async ({user} : {user:User}) => {
         }
         <span>{name}</span>
       </div>
-      <ProfileSetting/>
+      <ProfileSetting user={user}/>
     </div>
   )
 }
