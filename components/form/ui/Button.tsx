@@ -17,13 +17,13 @@ const Button: React.FC<ButtonProps> = ({
   danger,
   disabled,
 }) => {
+  const secondaryStyle = 'bg-gray-500'
   return ( 
     <button
       onClick={onClick}
       type={type}
       disabled={disabled}
       className={`
-        bg-red-500
         flex 
         justify-center 
         rounded-md 
@@ -34,6 +34,7 @@ const Button: React.FC<ButtonProps> = ({
         focus-visible:outline 
         focus-visible:outline-2 
         focus-visible:outline-offset-2 
+        ${secondary ? secondaryStyle : 'bg-blue-600'}
         `}
     >
       {children}
