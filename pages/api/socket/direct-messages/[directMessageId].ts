@@ -1,5 +1,5 @@
 import { NextApiRequest } from "next";
-import { MemberRole } from "@prisma/client";
+import { MemberRole, User } from "@prisma/client";
 
 import { NextApiResponseServerIo } from "@/types";
 import { currentProfilePages } from "@/lib/current-profile-pages";
@@ -9,12 +9,13 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponseServerIo,
 ) {
-  if (req.method !== "DELETE" && req.method !== "PATCH") {
+  if (req.method !== "POST" && req.method !== "PATCH") {
     return res.status(405).json({ error: "Method not allowed" });
   }
 
   try {
-    const profile = await currentProfilePages(req.body.userId);
+    type profileType = User | null;
+    const profile : profileType = await currentProfilePages(req.body.userId);
     const { directMessageId, conversationId } = req.query;
     const { content } = req.body;
 
@@ -93,7 +94,7 @@ export default async function handler(
       return res.status(401).json({ error: "Unauthorized" });
     }
 
-    if (req.method === "DELETE") {
+    if (req.method === "POST") {
       directMessage = await db.directMessage.update({
         where: {
           id: directMessageId as string,

@@ -1,33 +1,176 @@
-'use client'
-import ChannelHeader from "@/components/navigation/ChannelHeader"
+import { redirect } from "next/navigation";
 
-interface UserIdPageProps {
-  params:{
-    userId: string
+import db from "@/lib/prismadb";
+import getCurrentProfil from "@/lib/current-profil";
+import ChannelHeader from "@/components/navigation/ChannelHeader";
+import { MediaRoom } from "@/components/chat/mediaRoom";
+import { ChatMessages } from "@/components/ui/MessageZone";
+import MessageInput from "@/components/ui/MessageInput";
+import CallsHeader from "./components/CallsHeader";
+
+const getOrCreateConversation = async (
+  memberOneId: string,
+  memberTwoId: string
+) => {
+  let conversation =
+    (await findConversation(memberOneId, memberTwoId)) ||
+    (await findConversation(memberTwoId, memberOneId));
+
+  if (!conversation) {
+    conversation = await createNewConversation(memberOneId, memberTwoId);
+  }
+
+  return conversation;
+};
+
+const findConversation = async (memberOneId: string, memberTwoId: string) => {
+  try {
+    return await db.conversation.findFirst({
+      where: {
+        AND: [{ memberOneId: memberOneId }, { memberTwoId: memberTwoId }],
+      },
+      include: {
+        memberOne: {
+          include: {
+            user: true,
+          },
+        },
+        memberTwo: {
+          include: {
+            user: true,
+          },
+        },
+      },
+    });
+  } catch {
+    return null;
+  }
+};
+
+const createNewConversation = async (
+  memberOneId: string,
+  memberTwoId: string
+) => {
+  try {
+    return await db.conversation.create({
+      data: {
+        memberOneId,
+        memberTwoId,
+      },
+      include: {
+        memberOne: {
+          include: {
+            user: true,
+          },
+        },
+        memberTwo: {
+          include: {
+            user: true,
+          },
+        },
+      },
+    });
+  } catch {
+    return null;
+  }
+};
+
+interface MemberIdPageProps {
+  params: {
+    userId: string;
+  },
+  searchParams: {
+    video?: boolean;
+    call?: boolean;
   }
 }
-const MessagesPage = ({params}:UserIdPageProps) => {
-  
 
-  type MessagesTypes ={
-    message: string,
-    sender: {
-      name: string,
-      img: string
+const MemberIdPage = async ({
+  params,
+  searchParams,
+}: MemberIdPageProps) => {
+  const profile = await getCurrentProfil();
+
+  if (!profile) {
+    return redirect("/");
+  }
+
+  const currentMember = await db.member.findFirst({
+    where: {
+      userId: profile.id,
     },
-    date: string,
+    include: {
+      user: true,
+    },
+  });
+
+  if (!currentMember) {
+    return redirect("/");
   }
 
+  const conversation = await getOrCreateConversation(currentMember.id, params.userId);
 
+  if (!conversation) {
+    return redirect("/friends");
+  }
 
+  const { memberOne, memberTwo } = conversation;
 
-  return (
-    <main className="max-h-screen h-screen bg-slate-700 w-full p-2 pb-0 relative">
-      <ChannelHeader type="TEXT" title='salut'/>
-      {/* <MessageZone messages={messages}/> */}
-      {/* <MessageInput channelName="test"/>  */}
-    </main>
-  )
+  const otherMember = memberOne.userId === profile.id ? memberTwo : memberOne;
+
+  return ( 
+    <div className="max-h-screen h-screen bg-slate-700 w-full p-2 pb-0 relative">
+    <ChannelHeader type='TEXT' title={otherMember.user.name}>
+      <CallsHeader/>
+    </ChannelHeader>
+    
+      {searchParams.video && (
+        <MediaRoom
+          chatId={conversation.id}
+          video={true}
+          audio={true}
+          user={profile}
+        />
+      )}
+      {searchParams.call && (
+        <MediaRoom
+          chatId={conversation.id}
+          video={false}
+          audio={true}
+          user={profile}
+        />
+      )}
+      {(!searchParams.call && !searchParams.video) && (
+        <>
+        
+          <ChatMessages
+            member={currentMember}
+            name={otherMember.user.name}
+            chatId={conversation.id}
+            type="conversation"
+            apiUrl="/api/direct-messages"
+            socketUrl="/api/socket/direct-messages"
+            socketQuery={{
+              conversationId: conversation.id,
+              userId: profile.id,
+            }}
+            paramKey="conversationId"
+            paramValue={conversation.id}
+          />
+          
+          <MessageInput
+            name={otherMember.user.name}
+            type="conversation"
+            apiUrl="/api/socket/direct-messages"
+            query={{
+              conversationId: conversation.id,
+            }}
+            userId={profile.id}
+          /> 
+        </>
+      )} 
+    </div>
+   );
 }
-
-export default MessagesPage
+ 
+export default MemberIdPage;

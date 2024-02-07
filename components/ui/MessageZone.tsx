@@ -1,36 +1,3 @@
-// import Messages from "./Messages"
-// import { useRef, useEffect } from "react"
-
-// type MessageTypes ={
-//     message: string,
-//     sender: {
-//       name: string,
-//       img: string
-//     },
-//     date: string,
-//   }
-
-// type MessagesTypes = MessageTypes[]
-
-
-// const MessageZone = ({messages} : {messages: MessagesTypes}) => {
-//   const msgRef = useRef<HTMLDivElement>(null)
-//   useEffect(() => {
-//     msgRef.current?.scrollTo(0, msgRef.current.scrollHeight)
-//   }, [messages])
-//   return (
-//     <div ref={msgRef} className="flex gap-4 flex-col max-h-[calc(100%-5rem)] pt-20 pb-4 overflow-y-scroll overflow-anchor-none">
-//         {
-//           messages.map((message: MessageTypes, index:number) => (
-//             <Messages key={index} msg={message}/>
-//           ))
-//         }
-//     </div> 
-//   )
-// }
-
-// export default MessageZone
-
 "use client";
 
 import { Fragment, useRef, ElementRef } from "react";
@@ -42,9 +9,8 @@ import { useChatSocket } from "@/hook/UseChatSocket";
 import { useChatScroll } from "@/hook/UseChatScroll";
 import { ChatItem } from "../chat/ChatItem";
 import { ChatWelcome } from "../chat/ChatWelcome";
+import { ArrowPathIcon } from "@heroicons/react/24/solid";
 
-// import { ChatWelcome } from "./chat-welcome";
-// import { ChatItem } from "./chat-item";
 
 const DATE_FORMAT = "d MMM yyyy, HH:mm";
 
@@ -108,7 +74,7 @@ export const ChatMessages = ({
   if (status === "loading") {
     return (
       <div className="flex flex-col flex-1 justify-center items-center">
-        {/* <Loader2 className="h-7 w-7 text-zinc-500 animate-spin my-4" /> */}
+        <ArrowPathIcon className="h-7 w-7 text-zinc-500 animate-spin my-4" />
         <p className="text-xs text-zinc-500 dark:text-zinc-400">
           Loading messages...
         </p>

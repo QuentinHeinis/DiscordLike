@@ -10,9 +10,6 @@ export const currentProfilePages = async (userId: string) => {
       id: userId,
     },
   });
-  if (!profile) {
-    return userId;
-  }
 
   return profile;
 };
