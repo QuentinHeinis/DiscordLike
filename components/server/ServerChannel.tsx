@@ -7,14 +7,16 @@ import { usePathname } from "next/navigation"
 import { useStore } from "@/store/zustand"
 
 
-const ChannelSection = ({type} : {type:Channel['type']}) => {
+const ChannelSection = ({type, isModo} : {type:Channel['type'], isModo:boolean}) => {
   const {setModalOpen} = useStore()
   return (
     <p className='text-slate-100 text-sm flex justify-between'>
       {
         type === 'TEXT' && 'Text Channels' || type === 'AUDIO' && 'Voice Channels' || type === 'VIDEO' && 'Video Channels'
       }
-      <button onClick={()=>setModalOpen('addChannel')}><PlusIcon className="h-5 w-5"/></button>
+      {
+        isModo && <button onClick={()=>setModalOpen('addChannel')}><PlusIcon className="h-5 w-5"/></button>
+      }
     </p>
   )
 }
@@ -36,7 +38,7 @@ const Item = ({id, name, serverId, isModo} : ItemType ) => {
       <p>{name}</p>
     </Link>
     {
-      isModo &&
+      isModo && 
     <div>
       <button onClick={()=>{setModalOpen('updateChannel'); setCurrentUpdateId(id)}} className={`hidden group-hover:block`}>
         <Cog6ToothIcon className="h-5 w-5"/>
@@ -61,7 +63,7 @@ const ChannelTypes  = new Set(channels.map((channel:Channel) => channel.type))
       {
         Array.from(ChannelTypes).map((type:Channel['type']) => (
           <div key={type} className='p-2'>
-            <ChannelSection type={type}/>
+            <ChannelSection type={type} isModo={isModo}/>
             {
               channels.map((channel:Channel) => (
                 channel.type === type &&
