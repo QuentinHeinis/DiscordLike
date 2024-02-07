@@ -23,11 +23,13 @@ const isModo = checkModo ? true : false
 const isOwner = checkOwner ? true : false
 
   return (
-    <div>
+    <>
       <ServerHeader serverName={server.name} inviteCode={server.inviteCode} server={server} isModo={isModo} isOwner={isOwner}/>
-      <ServerChannel channels={server.channels} serverId={server.id} isModo={isModo}/>
-      <ServerMember members={server.members} server={server} isOwner={isOwner} userId={user.id}/>
-    </div>
+      <div className='absolute top-20 left-0 right-0 bottom-20 overflow-auto  '>
+        <ServerChannel channels={server.channels} serverId={server.id} isModo={isModo}/>
+        <ServerMember members={server.members} server={server} isOwner={isOwner} userId={user.id}/>
+      </div>
+    </>
   )
 }
 

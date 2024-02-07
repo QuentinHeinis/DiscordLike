@@ -6,7 +6,7 @@ const Profile = async ({user} : {user:User}) => {
   const image = user?.imageUrl
   const name = user?.name
   return (
-    <div className="w-full bg-red-950 h-16 flex items-center justify-around">
+    <div className="w-full bg-red-950 h-16 flex-none flex items-center justify-around">
       <div className="flex gap-2">
         {
           image 

@@ -53,7 +53,7 @@ const MessageInput = ({apiUrl, query, name, type, userId} : ChatInputProps) => {
 
 
   return (
-    <form className="h-20 items-center bg-slate-800 flex w-full gap-3 px-6 left-0 absolute bottom-0" onSubmit={handleSubmit(onSubmit)}>
+    <form className="h-16 items-center bg-slate-800 flex w-full gap-3 px-6 left-0 absolute bottom-0" onSubmit={handleSubmit(onSubmit)}>
       <button><PlusCircleIcon className="h-6 w-6"/></button>
       <textarea
       {...register('content', {required: true})} onChange={handleChange} value={input}

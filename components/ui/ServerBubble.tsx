@@ -15,7 +15,7 @@ const ServerBubble = ({link, isHome, img, name}:BubbleType) => {
   const getId = pathname?.split('/')[2]
   const linkId = link.split('/')[2]
   return(
-    <div className={`after:h-14 after:bg-white after:rounded-tr-xl after:rounded-br-xl after:w-1 after:-translate-y-full after:absolute after:left-0  ${getId === linkId ? 'after:flex' : 'after:hidden'}`}>
+    <div className={`after:h-14 after:bg-white after:rounded-tr-xl after:rounded-br-xl after:w-1 after:-translate-y-full after:relative after:-left-3  ${getId === linkId ? 'after:flex -mb-14' : 'after:hidden'}`}>
       <Link href={link}  className={`group relative bg-slate-500 flex h-14 w-14  ${isHome && 'p-2 rounded-lg justify-center items-center'} ${!isHome && 'rounded-full'}`}>
         {isHome ? <BoltIcon className="h-6 w-6 text-white"/>
         :
