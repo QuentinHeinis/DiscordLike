@@ -10,7 +10,7 @@ import { useStore } from "@/store/zustand"
 const ChannelSection = ({type, isModo} : {type:Channel['type'], isModo:boolean}) => {
   const {setModalOpen} = useStore()
   return (
-    <p className='text-gray-100 text-sm flex justify-between'>
+    <p className='text-neutral-100 text-sm flex justify-between'>
       {
         type === 'TEXT' && 'Text Channels' || type === 'AUDIO' && 'Voice Channels' || type === 'VIDEO' && 'Video Channels'
       }
@@ -33,7 +33,7 @@ const Item = ({id, name, serverId, isModo} : ItemType ) => {
   const {setModalOpen, setCurrentUpdateId} = useStore()
   const link = `/servers/${serverId}/${id}`
   return (
-<div className={`group  w-full h-12 flex items-center justify-between transition-colors cursor-pointer hover:bg-gray-600 px-4 gap-2 rounded-md ${pathname === link ? 'bg-gray-600' : ''}`}>
+<div className={`group  w-full h-12 flex items-center justify-between transition-colors cursor-pointer hover:bg-neutral-600 px-4 gap-2 rounded-md ${pathname === link ? 'bg-neutral-600' : ''}`}>
     <Link href={link} className="w-full" >
       <p>{name}</p>
     </Link>

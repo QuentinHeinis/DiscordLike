@@ -76,9 +76,9 @@ const Modal = () => {
     <>
     {
       modalOpen !== 'none' &&
-      <div className="fixed top-0 left-0 w-full h-full bg-gray-800 bg-opacity-50 z-50 flex items-center justify-center">
+      <div className="fixed top-0 left-0 w-full h-full bg-neutral-800 bg-opacity-50 z-50 flex items-center justify-center">
         
-        <div className="bg-gray-700 p-4 rounded-lg w-96">
+        <div className="bg-neutral-700 p-4 rounded-lg w-96">
           <div className="flex justify-between items-center">
             <h3 className="text-lg font-semibold">{name}</h3>
             <button onClick={()=>setModalOpen('none')}><XMarkIcon className="h-6 w-6 text-white"/></button>

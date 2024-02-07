@@ -53,7 +53,7 @@ const MessagesPage = async () => {
     })
 
   return (
-    <main className="max-h-screen h-screen overflow-auto bg-gray-700 pt-20 w-full p-2 pb-0 relative ">
+    <main className="max-h-screen h-screen overflow-auto bg-neutral-700 pt-20 w-full p-2 pb-0 relative ">
       <ChannelHeader title='Amis'>
         <Link href='friends/add'><UserPlusIcon className="h-6 w-6"/></Link>
       </ChannelHeader>

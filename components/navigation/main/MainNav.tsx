@@ -21,7 +21,7 @@ export default async function MainNav() {
  })
  
   return(
-    <div className="bg-gray-700 p-3 w-20 max-h-svh min-w-fit max-w-20">
+    <div className="bg-neutral-700 p-3 w-20 max-h-svh min-w-fit max-w-20">
       <ServerBubble name='Home' isHome={true} link='/friends'/>
       <ServerList servers={servers} />
     </div>

@@ -15,7 +15,7 @@ const ChannelHeader = ({title, type, children}: ChannelHeaderType) => {
     setMenuOpen(!menuOpen)    
   }
   return (
-    <div className="h-16 w-full bg-gray-800 z-10 absolute top-0 left-0 right-0 flex items-center justify-between px-3 border-b border-gray-200">
+    <div className="h-16 w-full bg-neutral-800 z-10 absolute top-0 left-0 right-0 flex items-center justify-between px-3 border-b border-neutral-200">
       <div className="flex gap-3 items-center">
         <button onClick={()=>toggleMenu()} className="md:hidden"><Bars3Icon className='h-6 w-6 text-white'/></button>
         {type === 'VIDEO' && <VideoCameraIcon className='h-6 w-6 text-white'/>}

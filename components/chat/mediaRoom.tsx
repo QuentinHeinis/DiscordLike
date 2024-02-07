@@ -39,9 +39,9 @@ export const MediaRoom = ({
     return (
       <div className="flex flex-col flex-1 justify-center items-center">
         <ArrowPathIcon
-          className="h-7 w-7 text-zinc-500 animate-spin my-4"
+          className="h-7 w-7 text-neutral-500 animate-spin my-4"
         />
-        <p className="text-xs text-zinc-500 dark:text-zinc-400">
+        <p className="text-xs text-neutral-500 dark:text-neutral-400">
           Loading...
         </p>
       </div>

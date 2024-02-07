@@ -17,7 +17,7 @@ const Navigation = async ({type, id} : NavigationType) => {
   return (
     <NavLayout>
       <MainNav/>
-      <div className="w-64 relative bg-gray-900 flex-none flex flex-col justify-between max-h-svh">
+      <div className="w-64 relative bg-neutral-900 flex-none flex flex-col justify-between max-h-svh">
         <SecondaryNav type={type} id={id}/>
         <Profile user={user!}/>
       </div>

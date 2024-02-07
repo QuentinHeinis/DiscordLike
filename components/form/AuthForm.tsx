@@ -135,7 +135,7 @@ const AuthForm = () => {
             text-sm 
             mt-6 
             px-2 
-            text-gray-500
+            text-neutral-500
           "
         >
           <div>

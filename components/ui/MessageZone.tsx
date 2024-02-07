@@ -75,8 +75,8 @@ export const ChatMessages = ({
   if (status === "loading") {
     return (
       <div className="flex flex-col flex-1 justify-center items-center">
-        {/* <Loader2 className="h-7 w-7 text-zinc-500 animate-spin my-4" /> */}
-        <p className="text-xs text-zinc-500 dark:text-zinc-400">
+        {/* <Loader2 className="h-7 w-7 text-neutral-500 animate-spin my-4" /> */}
+        <p className="text-xs text-neutral-500 dark:text-neutral-400">
           Loading messages...
         </p>
       </div>
@@ -86,7 +86,7 @@ export const ChatMessages = ({
   if (status === "error") {
     return (
       <div className="flex flex-col flex-1 justify-center items-center">
-        <p className="text-xs text-zinc-500 dark:text-zinc-400">
+        <p className="text-xs text-neutral-500 dark:text-neutral-400">
           Something went wrong!
         </p>
       </div>
@@ -109,7 +109,7 @@ export const ChatMessages = ({
           ) : (
             <button
               onClick={() => fetchNextPage()}
-              className="text-zinc-500 hover:text-zinc-600 dark:text-zinc-400 text-xs my-4 dark:hover:text-zinc-300 transition"
+              className="text-neutral-500 hover:text-neutral-600 dark:text-neutral-400 text-xs my-4 dark:hover:text-neutral-300 transition"
             >
               Load previous messages
             </button>

@@ -136,15 +136,15 @@ export const DirectChatItem = ({
                 {user.name}
               </p>
             </div>
-            <span className="text-xs text-zinc-500 dark:text-zinc-400">
+            <span className="text-xs text-neutral-500 dark:text-neutral-400">
               {timestamp}
             </span>
           </div>
           {!fileUrl && !isEditing && (
-            <p className="text-sm whitespace-pre-line text-zinc-600 dark:text-zinc-300">
+            <p className="text-sm whitespace-pre-line text-neutral-600 dark:text-neutral-300">
               {content}
               {isUpdated && !deleted && (
-                <span className="text-[10px] mx-2 text-zinc-500 dark:text-zinc-400">
+                <span className="text-[10px] mx-2 text-neutral-500 dark:text-neutral-400">
                   (edited)
                 </span>
               )}
@@ -153,7 +153,7 @@ export const DirectChatItem = ({
         </div>
       </div>
       {canDeleteMessage && (
-        <div className="hidden group-hover:flex items-center gap-x-2 absolute p-1 -top-2 right-5 bg-white dark:bg-zinc-800 border rounded-sm">
+        <div className="hidden group-hover:flex items-center gap-x-2 absolute p-1 -top-2 right-5 bg-white dark:bg-neutral-800 border rounded-sm">
             <TrashIcon
               onClick={() =>setModalOpen('deleteMessage',{ 
                 apiUrl: `${socketUrl}/${id}`,
@@ -161,7 +161,7 @@ export const DirectChatItem = ({
                 userId: currentMember.id
                })
               }
-              className="cursor-pointer ml-auto w-4 h-4 text-zinc-500 hover:text-zinc-600 dark:hover:text-zinc-300 transition"
+              className="cursor-pointer ml-auto w-4 h-4 text-neutral-500 hover:text-neutral-600 dark:hover:text-neutral-300 transition"
             />
         </div>
       )}

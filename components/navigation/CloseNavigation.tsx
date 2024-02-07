@@ -5,7 +5,7 @@ const CloseNavigation = () => {
   const {menuOpen, setMenuOpen} = useStore()
   return (
     <>
-        {menuOpen && <div onClick={()=>setMenuOpen(false)} className="w-full h-full bg-gray-900 bg-opacity-30 cursor-pointer md:hidden"></div>}
+        {menuOpen && <div onClick={()=>setMenuOpen(false)} className="w-full h-full bg-neutral-900 bg-opacity-30 cursor-pointer md:hidden"></div>}
     </>
   )
 }

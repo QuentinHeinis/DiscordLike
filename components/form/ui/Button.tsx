@@ -17,7 +17,7 @@ const Button: React.FC<ButtonProps> = ({
   danger,
   disabled,
 }) => {
-  const secondaryStyle = 'bg-gray-500'
+  const secondaryStyle = 'bg-neutral-500'
   return ( 
     <button
       onClick={onClick}
