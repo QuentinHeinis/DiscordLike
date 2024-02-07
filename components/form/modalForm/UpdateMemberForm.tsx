@@ -34,8 +34,21 @@ const UpdateMember = () => {
 
 
   return (
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <select {...register("role", { required: true })}>
+        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-5 items-center">
+          <select {...register("role", { required: true })} className="block 
+            w-full 
+            border-0 
+            py-1.5
+            shadow-sm 
+            ring-1
+            ring-neutral-500
+            placeholder:text-neutral-400
+            outline-none
+            focus:border-neutral-500
+            text-white
+            sm:text-sm 
+            sm:leading-6
+            rounded-md bg-neutral-600 h-10 px-2">
             {
               Object.keys(MemberRole).map((role, index) => {
                 if (role === 'ADMIN') return null
