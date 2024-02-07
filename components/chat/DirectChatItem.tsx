@@ -117,12 +117,12 @@ export const DirectChatItem = ({
   return (
     <div className="relative group flex items-center hover:bg-black/5 p-4 transition w-full">
       <div className="group flex gap-x-2 items-start w-full">
-        <div onClick={onMemberClick} className="cursor-pointer hover:drop-shadow-md transition">
+        <div onClick={onMemberClick} className="cursor-pointer flex rounded-full overflow-hidden w-12 h-12 flex-none hover:drop-shadow-md transition">
           {
             user.imageUrl ? 
-              <Image src={user.imageUrl} alt={`photo de profil de ${user.name}`} width={48} height={48} className="rounded-full" />
+              <Image src={user.imageUrl} alt={`photo de profil de ${user.name}`} width={48} height={48} className="w-full flex-none block object-cover" />
               :
-              <div className="flex items-center justify-center w-12 h-12 bg-primary rounded-full">
+              <div className="flex items-center justify-center w-12 h-12 bg-indigo-700 bg-primary flex-none">
                 <p className="text-white text-xl font-semibold">
                   {user.name.charAt(0)}
                 </p>

@@ -11,9 +11,7 @@ import { useEffect, useState } from "react";
 import { useRouter, useParams } from "next/navigation";
 import { useStore } from "@/store/zustand";
 
-import Input from "@/components/form/ui/Input";
-import Button from "@/components/form/ui/Button";
-import { PencilIcon, ShieldCheckIcon, ShieldExclamationIcon, TrashIcon } from "@heroicons/react/24/solid";
+import {  ShieldCheckIcon, ShieldExclamationIcon, TrashIcon } from "@heroicons/react/24/solid";
 
 interface ChatItemProps {
   id: string;
@@ -127,12 +125,12 @@ export const ChatItem = ({
   return (
     <div className="relative group flex items-center hover:bg-black/5 p-4 transition w-full">
       <div className="group flex gap-x-2 items-start w-full">
-        <div onClick={onMemberClick} className="cursor-pointer hover:drop-shadow-md transition h-12 w-12  rounded-full overflow-hidden object-cover">
+        <div onClick={onMemberClick} className="cursor-pointer flex rounded-full overflow-hidden w-12 h-12 flex-none hover:drop-shadow-md transition">
           {
             member.user.imageUrl ? 
-              <Image src={member.user.imageUrl} alt={`photo de profil de ${member.user.name}`} width={48} height={48}  className="block h-full w-full object-cover"/>
+              <Image src={member.user.imageUrl} alt={`photo de profil de ${member.user.name}`} width={48} height={48}  className="w-full flex-none block object-cover"/>
               :
-              <div className="flex items-center justify-center w-12 h-12 bg-indigo-700 rounded-full">
+              <div className="flex items-center justify-center w-12 h-12 bg-indigo-700 bg-primary flex-none">
                 <p className="text-white text-xl font-semibold">
                   {member.user.name.charAt(0)}
                 </p>
