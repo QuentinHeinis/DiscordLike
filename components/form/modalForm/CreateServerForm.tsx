@@ -10,9 +10,9 @@ import { useRouter } from "next/navigation"
 const AddServer = () => {
   const { register, handleSubmit, formState: { errors }, setValue, watch } = useForm<FieldValues>()
   const router = useRouter();
-  const onSubmit:SubmitHandler<FieldValues> = (data) => {
+  const onSubmit:SubmitHandler<FieldValues> = async (data) => {
     // handle create server
-    axios.post('/api/server', data)
+    await axios.post('/api/server', data)
     router.refresh();
   }
   
@@ -26,12 +26,14 @@ const AddServer = () => {
   }
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-        <Image src={image || ''} alt="" height={56} width={56}/>
-                      <CldUploadButton 
-                    options={{ maxFiles: 1 }} 
-                    onUpload={handleUpload} 
-                    uploadPreset="jgueeeco"
-                  ></CldUploadButton>
+        {image && <Image src={image} alt="server image" width={100} height={100} />}
+        <CldUploadButton 
+          options={{ maxFiles: 1 }} 
+          onUpload={handleUpload} 
+          uploadPreset="jgueeeco"
+        >
+          Ajouter une image
+        </CldUploadButton>
         <Input
           register={register}
           errors={errors}

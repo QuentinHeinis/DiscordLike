@@ -19,7 +19,7 @@ const isModo = checkModo ? true : false
 
   return (
     <div>
-      <ServerHeader serverName={server.name} inviteCode={server.inviteCode}/>
+      <ServerHeader serverName={server.name} inviteCode={server.inviteCode} server={server}/>
       <ServerChannel channels={server.channels} serverId={server.id} isModo={isModo}/>
       <ServerMember members={server.members}/>
     </div>

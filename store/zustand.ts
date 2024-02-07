@@ -1,7 +1,7 @@
 import { Channel, ChannelType, Server } from "@prisma/client";
 import { create } from "zustand";
 
-type modalType = 'deleteMessage'|'addServer' | 'addChannel' | 'updateChannel' | 'none';
+type modalType = 'deleteMessage'|'addServer' | 'addChannel' | 'updateChannel' | 'updateServer' | 'none';
 
 type ModalData = {
   server?: Server;

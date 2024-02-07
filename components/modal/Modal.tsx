@@ -6,11 +6,11 @@ import CreateChannel from "../form/modalForm/CreateChannelForm"
 import { useEffect, useState } from "react"
 import UpdateChannel from "../form/modalForm/UpdateChannelForm"
 import { DeleteMessageModal } from "../form/modalForm/DeleteMessageForm"
+import UpdateServer from "../form/modalForm/UpdateServerForm"
 
 const Modal = () => {
   const {modalOpen, setModalOpen} = useStore()
-  type nameType = 'Create a server' | 'Search for a server' | 'Create a channel' | 'Update a channel' | 'Delete Message'
-  const [name, setName] = useState<nameType>('Create a server')
+  const [name, setName] = useState<string>('Create a server')
 
   useEffect(() => {
     switch (modalOpen) {
@@ -27,6 +27,9 @@ const Modal = () => {
         break
       case 'deleteMessage':
         setName('Delete Message')
+        break
+      case 'updateServer':
+        setName('Update a server')
         break
       default:
         return
@@ -46,6 +49,8 @@ const Modal = () => {
         return <UpdateChannel/>
       case 'deleteMessage':
         return <DeleteMessageModal/>
+      case 'updateServer':
+        return <UpdateServer/>
       default:
         return
     }
