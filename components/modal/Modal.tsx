@@ -9,6 +9,7 @@ import { DeleteMessageModal } from "../form/modalForm/DeleteMessageForm"
 import UpdateServer from "../form/modalForm/UpdateServerForm"
 import UpdateProfil from "../form/modalForm/UpdateProfilForm"
 import { LeaveServer } from "../form/modalForm/LeaveServerForm"
+import UpdateMember from "../form/modalForm/UpdateMemberForm"
 
 const Modal = () => {
   const {modalOpen, setModalOpen} = useStore()
@@ -37,6 +38,8 @@ const Modal = () => {
         break
       case 'leaveServer':
         setName('Leave server')
+      case 'updateMember':
+        setName('Update member')
         break
       default:
         return
@@ -62,6 +65,8 @@ const Modal = () => {
         return <UpdateProfil/>
       case 'leaveServer':
         return <LeaveServer/>
+      case 'updateMember':
+        return <UpdateMember/>
       default:
         return
     }

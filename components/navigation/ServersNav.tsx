@@ -3,6 +3,7 @@ import { Channel, Member, Server } from '@prisma/client';
 import ServerChannel from '../server/ServerChannel';
 import ServerMember from '../server/ServerMember';
 import getCurrentUser from '@/lib/current-profil';
+import { redirect } from 'next/navigation';
 type ServersNavType = {
   server: Server & { channels: Channel[], members: Member[]} & { user: { username: string } }[] 
 }
@@ -10,6 +11,8 @@ type ServersNavType = {
 const ServersNav =  async ({server} : {server:any}) => {
 
 const user = await getCurrentUser()
+
+if(!user) return redirect('/')
 
 const checkModo = server.members.find((member:Member) => member.userId === user?.id && (member.role === "ADMIN" || member.role === "MODERATOR"))
 const checkOwner = server.members.find((member:Member) => member.userId === user?.id && member.role === "ADMIN")
@@ -23,12 +26,8 @@ const isOwner = checkOwner ? true : false
     <div>
       <ServerHeader serverName={server.name} inviteCode={server.inviteCode} server={server} isModo={isModo} isOwner={isOwner}/>
       <ServerChannel channels={server.channels} serverId={server.id} isModo={isModo}/>
-      <ServerMember members={server.members}/>
+      <ServerMember members={server.members} server={server} isOwner={isOwner} userId={user.id}/>
     </div>
-    
-
-
-    // </div>
   )
 }
 
