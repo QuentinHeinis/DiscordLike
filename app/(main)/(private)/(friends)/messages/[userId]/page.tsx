@@ -91,7 +91,7 @@ const MemberIdPage = async ({
   const otherMember = memberOne.id === profile.id ? memberTwo : memberOne;
 
   return ( 
-    <div className="max-h-screen h-screen bg-neutral-700 w-full p-2 pb-0 relative">
+    <div className="max-h-screen h-screen bg-neutral-700 w-full pb-0 relative">
     <ChannelHeader type='TEXT' title={otherMember.name}>
       <CallsHeader/>
     </ChannelHeader>

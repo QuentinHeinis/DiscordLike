@@ -45,7 +45,7 @@ const ChannelIdPage = async ({params}: ChannelIdPageProps) => {
 
 
   return (
-    <main className="max-h-screen h-screen bg-neutral-700 w-full p-2 pb-0 relative">
+    <main className="max-h-screen h-screen bg-neutral-700 w-full pb-0 relative overflow-hidden">
       <ChannelHeader type={channel.type} title={channel.name}/>
       {
         channel.type === "TEXT" && 
