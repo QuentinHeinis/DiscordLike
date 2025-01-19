@@ -27,7 +27,7 @@ export async function POST(req: Request) {
       },
     });
 
-    return NextResponse.json({ image, NameServerCreated });
+    return NextResponse.json({ image, NameServerCreated, id: server.id });
   } catch (error) {
     console.log("[SERVER_POST", error);
     return new NextResponse("Internal Server Error", { status: 500 });
