@@ -15,7 +15,7 @@ const Item = ({label, icon, link} : ItemType) =>{
   const pathname = usePathname()
   const {setMenuOpen} = useStore()
   return(
-    <Link onClick={()=>setMenuOpen(false)} href={link}  className={`w-full h-12 flex items-center transition-colors cursor-pointer hover:bg-neutral-600 px-4 gap-2 rounded-md ${pathname === link ? 'bg-neutral-600' : ''}`}>
+    <Link onClick={()=>setMenuOpen(false)} href={link}  className={`w-full h-12 flex items-center transition-colors cursor-pointer hover:bg-neutral-600 px-4 text-white gap-2 rounded-md ${pathname === link ? 'bg-neutral-500' : ''}`}>
       {
         icon === 'friend' ?
         <UserCircleIcon className='h-6 w-6 text-neutral-500'/>
