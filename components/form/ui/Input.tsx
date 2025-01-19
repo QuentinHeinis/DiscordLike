@@ -15,6 +15,7 @@ interface InputProps {
   register: UseFormRegister<FieldValues>,
   errors: FieldErrors
   disabled?: boolean;
+  [key: string]: any;
 }
 
 const Input: React.FC<InputProps> = ({
@@ -28,7 +29,7 @@ const Input: React.FC<InputProps> = ({
   ...props
 }) => {
   return ( 
-    <div>
+    <div className="w-3/4">
       <label 
         htmlFor={id} 
         className="

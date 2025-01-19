@@ -10,7 +10,8 @@ type ModalData = {
   apiUrl?: string;
   query?: Record<string, any>;
   userId?:string,
-  user?:User
+  user?:User,
+  other?: any,
 }
 
 type StoreType = {
@@ -30,5 +31,5 @@ export const useStore = create<StoreType>()((set) => ({
   modalOpen: 'none',
   setModalOpen: (modalOpen: modalType, data = {}) => set({ modalOpen, data}),
   currentUpdateId: '',
-  setCurrentUpdateId: (currentUpdateId: string) => set({ currentUpdateId }),
+  setCurrentUpdateId: (currentUpdateId: string) => set({ currentUpdateId })
 }));

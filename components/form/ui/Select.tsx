@@ -1,22 +1,19 @@
-'use client';
+"use client";
 
 // import clsx from "clsx";
-import { 
-  FieldErrors, 
-  FieldValues, 
-  UseFormRegister 
-} from "react-hook-form";
+import { FieldErrors, FieldValues, UseFormRegister } from "react-hook-form";
 
 interface InputProps {
   label: string;
   id: string;
-  options: {value: string, label: string}[];
+  options: { value: string; label: string }[];
   type?: string;
   required?: boolean;
-  register: UseFormRegister<FieldValues>,
-  errors: FieldErrors
+  register: UseFormRegister<FieldValues>;
+  errors: FieldErrors;
   disabled?: boolean;
   fullWidth?: boolean;
+  value?: string;
 }
 
 const Input: React.FC<InputProps> = ({
@@ -26,12 +23,13 @@ const Input: React.FC<InputProps> = ({
   options,
   disabled,
   required,
-  fullWidth
+  fullWidth,
+  value,
 }) => {
-  return ( 
-    <div>
-      <label 
-        htmlFor={id} 
+  return (
+    <div className="w-3/4">
+      <label
+        htmlFor={id}
         className="
           block 
           text-sm 
@@ -43,7 +41,8 @@ const Input: React.FC<InputProps> = ({
         {label}
       </label>
       <div className="mt-2 flex w-full">
-        <select id={id}
+        <select
+          id={id}
           className={`
             block 
             w-full 
@@ -59,21 +58,25 @@ const Input: React.FC<InputProps> = ({
             sm:text-sm 
             sm:leading-6
             rounded-md bg-neutral-600 h-10 px-2
-            ${fullWidth && 'w-full'}
+            ${fullWidth && "w-full"}
             `}
           autoComplete={id}
           disabled={disabled}
           {...register(id, { required })}
         >
-          {
-            options.map((option) => (
-              <option key={option.value} value={option.value}>{option.label}</option>
-            ))
-          }
+          {options.map((option) => (
+            <option
+              key={option.value}
+              value={option.value}
+              selected={value === option.value}
+            >
+              {option.label}
+            </option>
+          ))}
         </select>
       </div>
     </div>
-   );
-}
- 
+  );
+};
+
 export default Input;

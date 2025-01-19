@@ -66,7 +66,9 @@ const Item = ({ id, name, serverId, isModo, type }: ItemType) => {
         <div>
           <button
             onClick={() => {
-              setModalOpen("updateChannel");
+              setModalOpen("updateChannel", {
+                other: { inputField: name, type: type },
+              });
               setCurrentUpdateId(id);
             }}
             className={`hidden group-hover:block`}
