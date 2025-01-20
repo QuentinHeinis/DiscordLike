@@ -67,10 +67,11 @@ const UpdateProfil = () => {
             register={register}
             errors={errors}
             required
+            value={user?.name}
             id="name" 
             label="Nom de profil"
           />          
-          <Button type="submit">Update</Button>
+          <Button type="submit">Modifier</Button>
         </form>
   )
 }
