@@ -5,6 +5,7 @@ import getCurrentUser from "@/lib/current-profil";
 import db from "@/lib/prismadb";
 import { redirect } from "next/navigation";
 import { MediaRoom } from "@/components/chat/mediaRoom";
+import { Fragment } from "react";
 
 interface ChannelIdPageProps {
   params: {
@@ -42,7 +43,7 @@ const ChannelIdPage = async ({ params }: ChannelIdPageProps) => {
   }
 
   return (
-    <main className="max-h-screen h-screen bg-neutral-200 dark:bg-neutral-700 w-full pb-0 relative overflow-hidden">
+    <Fragment key={channel.id}>
       <ChannelHeader type={channel.type} title={channel.name} />
       {channel.type === "TEXT" && (
         <>
@@ -78,7 +79,7 @@ const ChannelIdPage = async ({ params }: ChannelIdPageProps) => {
       {channel.type === "VIDEO" && (
         <MediaRoom chatId={channel.id} video={true} audio={true} user={user} />
       )}
-    </main>
+    </Fragment>
   );
 };
 
