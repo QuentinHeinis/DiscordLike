@@ -44,7 +44,8 @@ type ItemType = {
 
 const Item = ({ id, name, serverId, isModo, type }: ItemType) => {
   const pathname = usePathname();
-  const { setModalOpen, setCurrentUpdateId } = useStore();
+  const { setModalOpen, setCurrentUpdateId, setMenuOpen } = useStore();
+  
   const link = `/servers/${serverId}/${id}`;
   return (
     <div
@@ -52,7 +53,7 @@ const Item = ({ id, name, serverId, isModo, type }: ItemType) => {
         pathname === link ? "bg-neutral-500" : ""
       }`}
     >
-      <Link href={link} className="w-full flex items-center gap-2 ">
+      <Link href={link} className="w-full flex items-center gap-2 " onClick={() => {setMenuOpen(false)}}>
         {(type === "TEXT" && <HashtagIcon className="h-5 w-5 " />) ||
           (type === "AUDIO" && <SpeakerWaveIcon className="h-5 w-5 " />) ||
           (type === "VIDEO" && <VideoCameraIcon className="h-5 w-5 " />)}
