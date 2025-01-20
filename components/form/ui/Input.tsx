@@ -29,7 +29,7 @@ const Input: React.FC<InputProps> = ({
   ...props
 }) => {
   return ( 
-    <div className="w-3/4">
+    <div className="w-full">
       <label 
         htmlFor={id} 
         className="
