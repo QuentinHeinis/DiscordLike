@@ -76,12 +76,12 @@ const Modal = () => {
   return (
     <>
       {modalOpen !== "none" && (
-        <div className="fixed text-white top-0 left-0 w-full h-full bg-neutral-800 bg-opacity-50 z-50 flex items-center justify-center">
-          <div className="bg-neutral-700 p-4 rounded-lg w-96">
+        <div className="fixed text-neutral-700 dark:text-neutral-100 top-0 left-0 w-full h-full bg-neutral-800 bg-opacity-50 z-50 flex items-center justify-center">
+          <div className="bg-neutral-200 dark:bg-neutral-700 p-4 rounded-lg w-96">
             <div className="flex justify-between items-center">
               <h3 className="text-lg font-semibold">{name}</h3>
               <button onClick={() => setModalOpen("none")}>
-                <XMarkIcon className="h-6 w-6 text-white" />
+                <XMarkIcon className="h-6 w-6" />
               </button>
             </div>
             <RenderModal />

@@ -1,19 +1,15 @@
-'use client';
+"use client";
 
 // import clsx from "clsx";
-import { 
-  FieldErrors, 
-  FieldValues, 
-  UseFormRegister 
-} from "react-hook-form";
+import { FieldErrors, FieldValues, UseFormRegister } from "react-hook-form";
 
 interface InputProps {
   label: string;
   id: string;
   type?: string;
   required?: boolean;
-  register: UseFormRegister<FieldValues>,
-  errors: FieldErrors
+  register: UseFormRegister<FieldValues>;
+  errors: FieldErrors;
   disabled?: boolean;
   [key: string]: any;
 }
@@ -24,20 +20,20 @@ const Input: React.FC<InputProps> = ({
   register,
   required,
   errors,
-  type = 'text',
+  type = "text",
   disabled,
   ...props
 }) => {
-  return ( 
+  return (
     <div className="w-full">
-      <label 
-        htmlFor={id} 
+      <label
+        htmlFor={id}
         className="
           block 
           text-sm 
           font-medium 
           leading-6 
-          text-white
+          text-neutral-700 dark:text-neutral-100
         "
       >
         {label}
@@ -62,14 +58,14 @@ const Input: React.FC<InputProps> = ({
             placeholder:text-neutral-400
             outline-none
             focus:border-neutral-500
-            text-white
+            bg-neutral-300 dark:bg-neutral-600 text-neutral-700 dark:text-neutral-300
             sm:text-sm 
             sm:leading-6
-            rounded-md bg-neutral-600 h-10 px-2`}
+            rounded-md  h-10 px-2`}
         />
       </div>
     </div>
-   );
-}
- 
+  );
+};
+
 export default Input;

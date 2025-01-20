@@ -49,12 +49,14 @@ const ServerHeader = ({
 }: ServerHeaderType) => {
   const { setModalOpen } = useStore();
   return (
-    <div className="group flex-none relative w-full bg-neutral-600 flex justify-around items-center h-16 border-b border-neutral-200">
-      <p className="text-xl font-bold text-neutral-100">{serverName}</p>
+    <div className="group flex-none relative w-full bg-neutral-400 dark:bg-neutral-600 flex justify-around items-center h-16 border-b border-neutral-200">
+      <p className="text-xl font-bold text-neutral-900 dark:text-neutral-100 ">
+        {serverName}
+      </p>
       <div>
         <ChevronDownIcon className="group-hover:rotate-180 transition-all h-6 w-6" />
       </div>
-      <div className="h-0 z-50 group-hover:h-fit group-hover:visible pt-2 pb-2 transition-all scale-50 invisible flex gap-1 flex-col items-center group-hover:scale-100 overflow-hidden absolute w-[95%] bg-neutral-500 top-full border-t">
+      <div className="h-0 z-50 group-hover:h-fit group-hover:visible pt-2 pb-2 transition-all scale-50 invisible flex gap-1 flex-col items-center group-hover:scale-100 overflow-hidden absolute w-[95%] bg-neutral-400 text-neutral-800 dark:bg-neutral-600 dark:text-neutral-200 top-full border-t">
         <button className="w-5/6" onClick={() => handleCopy(inviteCode)}>
           <ServerUtils
             text="Inviter des gens"

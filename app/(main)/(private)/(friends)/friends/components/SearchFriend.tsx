@@ -1,41 +1,64 @@
-'use client'
-import { VideoCameraIcon, PhoneIcon } from "@heroicons/react/24/solid"
-import { User } from "@prisma/client"
-import Image from "next/image"
-import Link from "next/link"
-import { useEffect, useState } from "react"
+"use client";
+import { VideoCameraIcon, PhoneIcon } from "@heroicons/react/24/solid";
+import { User } from "@prisma/client";
+import Image from "next/image";
+import Link from "next/link";
+import { useEffect, useState } from "react";
 
-const SearchFriend = ({friends} : {friends:User[]}) => {
-  const [filteredFriends, setFilteredFriends] = useState<User[]>(friends)
+const SearchFriend = ({ friends }: { friends: User[] }) => {
+  const [filteredFriends, setFilteredFriends] = useState<User[]>(friends);
 
-  const handleChange = (e:any) => {
-    setFilteredFriends(friends.filter(friend => friend.name.includes(e.target.value)))
-  }
+  const handleChange = (e: any) => {
+    setFilteredFriends(
+      friends.filter((friend) => friend.name.includes(e.target.value))
+    );
+  };
   return (
     <>
       <div className="flex flex-col w-full items-center">
-      <input type="text" onChange={(e)=>handleChange(e)} placeholder="Rechercher" className="w-3/4 mb-6 rounded-md bg-neutral-600 h-10 px-2"/>
-        {
-          filteredFriends.map(friend => (
-            <div key={friend.id} className="flex w-3/4 justify-between text-xl border-b px-3 hover:bg-neutral-600 transition-all">
-              <Link href={`/messages/${friend.id}`} className="flex gap-4 w-full py-6">
-                {friend.imageUrl ? <Image src={friend.imageUrl} alt="" width={32} height={32} className='h-8 w-8 rounded-full'/> : <div className='h-8 w-8 grid place-content-center rounded-full bg-indigo-700'>{friend.name.charAt(0)}</div> }
-                {friend.name}
+        <input
+          type="text"
+          onChange={(e) => handleChange(e)}
+          placeholder="Rechercher"
+          className="w-3/4 mb-6 rounded-md bg-neutral-300 dark:bg-neutral-600 text-neutral-700 dark:text-neutral-300 h-10 px-2 focus:outline-none"
+        />
+        {filteredFriends.map((friend) => (
+          <div
+            key={friend.id}
+            className="flex w-3/4 justify-between text-xl border-b px-3 hover:bg-neutral-400 dark:hover:bg-neutral-600 transition-all text-neutral-700 dark:text-neutral-300 border-neutral-400 dark:border-neutral-200"
+          >
+            <Link
+              href={`/messages/${friend.id}`}
+              className="flex gap-4 w-full py-6"
+            >
+              {friend.imageUrl ? (
+                <Image
+                  src={friend.imageUrl}
+                  alt=""
+                  width={32}
+                  height={32}
+                  className="h-8 w-8 rounded-full"
+                />
+              ) : (
+                <div className="h-8 w-8 grid place-content-center rounded-full bg-indigo-700">
+                  {friend.name.charAt(0)}
+                </div>
+              )}
+              {friend.name}
+            </Link>
+            <div className="flex gap-2 py-6">
+              <Link href={`/messages/${friend.id}?call=true`}>
+                <PhoneIcon className="h-6 w-6" />
               </Link>
-              <div className="flex gap-2 py-6">
-                <Link href={`/messages/${friend.id}?call=true`}>
-                  <PhoneIcon className="h-6 w-6"/>
-                </Link>
-                <Link href={`/messages/${friend.id}?video=true`}>
-                  <VideoCameraIcon className="h-6 w-6"/>
-                </Link>
-              </div>
+              <Link href={`/messages/${friend.id}?video=true`}>
+                <VideoCameraIcon className="h-6 w-6" />
+              </Link>
             </div>
-          ))
-        }
+          </div>
+        ))}
       </div>
     </>
-  )
-}
+  );
+};
 
-export default SearchFriend
+export default SearchFriend;

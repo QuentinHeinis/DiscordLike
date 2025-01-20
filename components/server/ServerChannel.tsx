@@ -21,7 +21,7 @@ const ChannelSection = ({
 }) => {
   const { setModalOpen } = useStore();
   return (
-    <p className="text-neutral-100 text-sm flex justify-between">
+    <p className="text-sm flex justify-between">
       {(type === "TEXT" && "Channels textuels") ||
         (type === "AUDIO" && "Channels vocals") ||
         (type === "VIDEO" && "Channels vidéos")}
@@ -48,19 +48,15 @@ const Item = ({ id, name, serverId, isModo, type }: ItemType) => {
   const link = `/servers/${serverId}/${id}`;
   return (
     <div
-      className={`group  w-full h-12 flex items-center justify-between transition-colors cursor-pointer hover:bg-neutral-600 px-4 gap-2 rounded-md ${
+      className={`group  w-full h-12 flex items-center justify-between transition-colors cursor-pointer hover:bg-neutral-400 dark:hover:bg-neutral-600 px-4 text-neutral-800 dark:text-neutral-300 gap-2 rounded-md ${
         pathname === link ? "bg-neutral-500" : ""
       }`}
     >
-      <Link href={link} className="w-full flex items-center gap-2">
-        {(type === "TEXT" && <HashtagIcon className="h-5 w-5 text-white" />) ||
-          (type === "AUDIO" && (
-            <SpeakerWaveIcon className="h-5 w-5 text-white" />
-          )) ||
-          (type === "VIDEO" && (
-            <VideoCameraIcon className="h-5 w-5 text-white" />
-          ))}
-        <p className="text-white">{name}</p>
+      <Link href={link} className="w-full flex items-center gap-2 ">
+        {(type === "TEXT" && <HashtagIcon className="h-5 w-5 " />) ||
+          (type === "AUDIO" && <SpeakerWaveIcon className="h-5 w-5 " />) ||
+          (type === "VIDEO" && <VideoCameraIcon className="h-5 w-5 " />)}
+        <p className="">{name}</p>
       </Link>
       {isModo && (
         <div>
@@ -73,7 +69,7 @@ const Item = ({ id, name, serverId, isModo, type }: ItemType) => {
             }}
             className={`hidden group-hover:block`}
           >
-            <Cog6ToothIcon className="h-5 w-5 text-white" />
+            <Cog6ToothIcon className="h-5 w-5 " />
           </button>
         </div>
       )}

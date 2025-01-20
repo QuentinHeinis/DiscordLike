@@ -65,7 +65,7 @@ const MessageInput = ({
 
   return (
     <form
-      className="h-16 items-center bg-neutral-800 flex w-full gap-3 px-6 left-0 absolute bottom-0"
+      className="h-16 items-center bg-neutral-100 dark:bg-neutral-800 text-neutral-800 dark:text-neutral-100 flex w-full gap-3 px-6 left-0 absolute bottom-0"
       onSubmit={handleSubmit(onSubmit)}
     >
       <button>
@@ -96,7 +96,7 @@ const MessageInput = ({
         placeholder={inputPlaceholder}
       />
       {input.length > 0 && (
-        <button type="submit" disabled={loading}>
+        <button type="submit" disabled={loading} className="text-neutral-100 dark:text-neutral-800">
           {loading ? (
             <ArrowPathIcon className="h-8 w-8 animate-spin rounded-full bg-indigo-700 flex-none p-1" />
           ) : (
