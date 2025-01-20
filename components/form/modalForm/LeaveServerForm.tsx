@@ -8,28 +8,31 @@ import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 
 export const LeaveServer = () => {
-  const {  handleSubmit } = useForm<FieldValues>()
+  const { handleSubmit } = useForm<FieldValues>();
   const router = useRouter();
   const { setModalOpen, data } = useStore();
 
   const { server } = data;
-  const handleDelete:SubmitHandler<FieldValues>  = async (data) => {
+  const handleDelete: SubmitHandler<FieldValues> = async (data) => {
     try {
       await axios.patch(`/api/server/${server?.id}/leave`); // post as delete
-      toast.success('Serveur quitté')
+      toast.success("Serveur quitté");
     } catch (error) {
       console.log(error);
-    } finally{
-      setModalOpen('none');
-      router.push('/friends')
+    } finally {
+      setModalOpen("none");
+      router.push("/friends");
     }
-  }
-  
+  };
 
   return (
     <form onSubmit={handleSubmit(handleDelete)}>
-        <Button type="button" onClick={()=>setModalOpen('none')}>Annuler</Button>
-        <Button type="submit">Créer</Button>
+      <div className="flex mx-auto w-3/4 justify-between mt-5">
+        <Button type="button" onClick={() => setModalOpen("none")}>
+          Annuler
+        </Button>
+        <Button type="submit" danger>Quitter</Button>
+      </div>
     </form>
-  )
-}
+  );
+};
