@@ -75,6 +75,13 @@ const MessageInput = ({
         {...register("content", { required: true })}
         onChange={handleChange}
         onKeyDown={(e) => {
+
+          if (e.key === "Enter" && e.shiftKey) {
+            e.preventDefault();
+            setInput(input + "\n");
+            return;
+          }
+
           if (e.key === "Enter") {
             e.preventDefault();
             if (!loading) {
