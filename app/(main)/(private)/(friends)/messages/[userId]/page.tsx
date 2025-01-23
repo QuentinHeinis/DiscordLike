@@ -62,23 +62,19 @@ const createNewConversation = async (
 interface MemberIdPageProps {
   params: {
     userId: string;
-  },
+  };
   searchParams: {
     video?: boolean;
     call?: boolean;
-  }
+  };
 }
 
-const MemberIdPage = async ({
-  params,
-  searchParams,
-}: MemberIdPageProps) => {
+const MemberIdPage = async ({ params, searchParams }: MemberIdPageProps) => {
   const profile = await getCurrentProfil();
 
   if (!profile) {
     return redirect("/");
   }
-
 
   const conversation = await getOrCreateConversation(profile.id, params.userId);
 
@@ -90,12 +86,12 @@ const MemberIdPage = async ({
 
   const otherMember = memberOne.id === profile.id ? memberTwo : memberOne;
 
-  return ( 
-    <div className="max-h-screen h-screen bg-neutral-700 w-full pb-0 relative">
-    <ChannelHeader type='TEXT' title={otherMember.name}>
-      <CallsHeader/>
-    </ChannelHeader>
-    
+  return (
+    <div className="max-h-screen h-screen bg-neutral-200 dark:bg-neutral-700 w-full pb-0 relative overflow-hidden">
+      <ChannelHeader type="TEXT" title={otherMember.name}>
+        <CallsHeader />
+      </ChannelHeader>
+
       {searchParams.video && (
         <MediaRoom
           chatId={conversation.id}
@@ -112,9 +108,8 @@ const MemberIdPage = async ({
           user={profile}
         />
       )}
-      {(!searchParams.call && !searchParams.video) && (
+      {!searchParams.call && !searchParams.video && (
         <>
-        
           <ChatMessages
             member={profile}
             name={otherMember.name}
@@ -129,7 +124,7 @@ const MemberIdPage = async ({
             paramKey="conversationId"
             paramValue={conversation.id}
           />
-          
+
           <MessageInput
             name={otherMember.name}
             type="conversation"
@@ -138,11 +133,11 @@ const MemberIdPage = async ({
               conversationId: conversation.id,
             }}
             userId={profile.id}
-          /> 
+          />
         </>
-      )} 
+      )}
     </div>
-   );
-}
- 
+  );
+};
+
 export default MemberIdPage;

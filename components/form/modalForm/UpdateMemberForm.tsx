@@ -1,41 +1,45 @@
-'use client'
-import { FieldValues, SubmitHandler, useForm } from "react-hook-form"
-import Button from "../ui/Button"
-import axios from "axios"
-import { useRouter } from "next/navigation"
-import { useStore } from "@/store/zustand"
-import { MemberRole } from "@prisma/client"
-import toast from "react-hot-toast"
+"use client";
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import Button from "../ui/Button";
+import axios from "axios";
+import { useRouter } from "next/navigation";
+import { useStore } from "@/store/zustand";
+import { MemberRole } from "@prisma/client";
+import toast from "react-hot-toast";
 
 const UpdateMember = () => {
-  const router = useRouter()
-  const {setModalOpen, data} = useStore()
-  const { register, handleSubmit} = useForm<FieldValues>()
-  const {userId, server} = data
-  const onSubmit:SubmitHandler<FieldValues> = async (data) => {
+  const router = useRouter();
+  const { setModalOpen, data } = useStore();
+  const { register, handleSubmit } = useForm<FieldValues>();
+  const { userId, server, other } = data;
+  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     // handle patch member
-    try{
+    try {
       const dataSend = {
         ...data,
         userId: userId,
-        serverId: server?.id
-      }
-      
-      await axios.patch(`/api/member`, dataSend)
+        serverId: server?.id,
+      };
 
-      toast.success('Membre modifié')
+      await axios.patch(`/api/member`, dataSend);
+
+      toast.success("Membre modifié");
+    } finally {
+      setModalOpen("none");
+      router.refresh();
     }
-    finally{
-      setModalOpen("none")
-      router.refresh()
-    }
-  }
+  };
 
 
 
   return (
-        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-5 items-center">
-          <select {...register("role", { required: true })} className="block 
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="flex flex-col gap-5 items-center"
+    >
+      <select
+        {...register("role", { required: true })}
+        className="block 
             w-full 
             border-0 
             py-1.5
@@ -48,18 +52,20 @@ const UpdateMember = () => {
             text-white
             sm:text-sm 
             sm:leading-6
-            rounded-md bg-neutral-600 h-10 px-2">
-            {
-              Object.keys(MemberRole).map((role, index) => {
-                if (role === 'ADMIN') return null
-                return <option key={index} value={role}>{role}</option>
-              })
-            }
-          
-          </select>
-          <Button type="submit">Modifier</Button>
-        </form>
-  )
-}
+            rounded-md bg-neutral-600 h-10 px-2"
+      >
+        {Object.keys(MemberRole).map((role, index) => {
+          if (role === "ADMIN") return null;
+          return (
+            <option key={index} value={role} selected={role === other.role}>
+              {role}
+            </option>
+          );
+        })}
+      </select>
+      <Button type="submit">Modifier</Button>
+    </form>
+  );
+};
 
-export default UpdateMember
+export default UpdateMember;

@@ -1,56 +1,53 @@
-import ChannelHeader from "@/components/navigation/ChannelHeader"
-import MessageInput from "@/components/ui/MessageInput"
-import {ChatMessages} from "@/components/ui/MessageZone"
-import getCurrentUser from "@/lib/current-profil"
-import db from '@/lib/prismadb'
-import { redirect } from "next/navigation"
-import {MediaRoom} from "@/components/chat/mediaRoom"
+import ChannelHeader from "@/components/navigation/ChannelHeader";
+import MessageInput from "@/components/ui/MessageInput";
+import { ChatMessages } from "@/components/ui/MessageZone";
+import getCurrentUser from "@/lib/current-profil";
+import db from "@/lib/prismadb";
+import { redirect } from "next/navigation";
+import { MediaRoom } from "@/components/chat/mediaRoom";
+import { Fragment } from "react";
 
 interface ChannelIdPageProps {
-  params:{
-    serverId: string,
-    channelId: string
-  }
+  params: {
+    serverId: string;
+    channelId: string;
+  };
 }
 
-const ChannelIdPage = async ({params}: ChannelIdPageProps) => {
+const ChannelIdPage = async ({ params }: ChannelIdPageProps) => {
+  const user = await getCurrentUser();
 
-  const user = await getCurrentUser()
-
-  if(!user){
-    return redirect('/')
+  if (!user) {
+    return redirect("/");
   }
 
   const channel = await db.channel.findUnique({
-    where:{
-      id: params.channelId
-    }
-  })
+    where: {
+      id: params.channelId,
+    },
+  });
 
-  if(!channel){
-    return redirect('/servers/' + params.serverId)
+  if (!channel) {
+    return redirect("/servers/" + params.serverId);
   }
 
   const member = await db.member.findFirst({
-    where:{
+    where: {
       serverId: params.serverId,
-      userId: user.id
-    }
-  })
+      userId: user.id,
+    },
+  });
 
-  if(!member){
-    return redirect('/')
+  if (!member) {
+    return redirect("/");
   }
 
-
-
   return (
-    <main className="max-h-screen h-screen bg-neutral-700 w-full pb-0 relative overflow-hidden">
-      <ChannelHeader type={channel.type} title={channel.name}/>
-      {
-        channel.type === "TEXT" && 
+    <Fragment key={channel.id}>
+      <ChannelHeader type={channel.type} title={channel.name} />
+      {channel.type === "TEXT" && (
         <>
-          <ChatMessages 
+          <ChatMessages
             member={member}
             name={channel.name}
             chatId={channel.id}
@@ -73,30 +70,17 @@ const ChannelIdPage = async ({params}: ChannelIdPageProps) => {
               serverId: channel.serverId,
             }}
             userId={user.id}
-          /> 
+          />
         </>
-      }
-      {
-        channel.type === "AUDIO" &&         
-        <MediaRoom
-          chatId={channel.id}
-          video={false}
-          audio={true}
-          user={user}
-        />
-      }
-      {
-        channel.type === "VIDEO" && 
-        <MediaRoom
-          chatId={channel.id}
-          video={true}
-          audio={true}
-          user={user}
-        />
-      }
-      
-    </main>
-  )
-}
+      )}
+      {channel.type === "AUDIO" && (
+        <MediaRoom chatId={channel.id} video={false} audio={true} user={user} />
+      )}
+      {channel.type === "VIDEO" && (
+        <MediaRoom chatId={channel.id} video={true} audio={true} user={user} />
+      )}
+    </Fragment>
+  );
+};
 
-export default ChannelIdPage
+export default ChannelIdPage;
